@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:03:15 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/01/29 17:23:18 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:25:40 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static size_t	ft_count_words(char const *s, char c)
 		i++;
 	while (s[i] != '\0')
 	{
-		printf("s[i] = %c\n", s[i]);
 		if ((i == 0 && s[i] != c) || (s[i] != c && s[i - 1] == c))
 			count++;
 		// if (s[i] != c && !in_word) // Start of a new word
