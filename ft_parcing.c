@@ -3,62 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parcing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikardi <ikardi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 23:45:29 by ikardi            #+#    #+#             */
-/*   Updated: 2025/01/29 01:00:48 by ikardi           ###   ########.fr       */
+/*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
+/*   Updated: 2025/01/29 17:13:54 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
-void	ft_mapcheck(char **map, int full_map_size)
+char	**ft_get_map(int fd)
 {
-	int	x;
-	int	y;
-	int	map_int[full_map_size];
-	int	f_mp;
+	char	*map;
+	char	*buffer;
+	char	*tmp;
+	char	**result;
 
-	x = 0;
-	y = 0;
-	f_mp = 0;
-	while (map[y])
+	map = get_next_line(fd);
+	if (!map)														// Handling empty file
+		return (close(fd), perror("Error\nEmpty file\n"), NULL);
+	while ((buffer = get_next_line(fd)) != NULL)
 	{
-		map_int[f_mp] = ft_atoi(map[y]);
-		printf("%d\n", map_int[f_mp]);
-		f_mp++;
-		y++;
+		tmp = map;
+		map = ft_strjoin(buffer, map);
+		free(tmp);
 	}
-	
+	int i = 0;
+	while (map[i])
+	{
+		if (map[i] == '\n')
+			printf("newl\n");
+		i++;
+	}
+	printf("map %s\n", map);
+	result = ft_split(map, '\n');
+	if (!result)
+		return (NULL);
+	return (free(map), result);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	char	*map[10240];
-	int		fd_map;
-	int		map_i;
-	int		full_map_size;
-	if (argc != 2)
-		return (perror("Error\nToo many arguments"), 1);
-	fd_map = open(argv[1], O_RDONLY);
-	if (fd_map < 0)
+	int		fd;
+	char	**map;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
 		return (perror("Error\nUnable to open file"), 1);
-	map_i = 0;
-	full_map_size = 0;
-	while (map[map_i] = get_next_line(fd_map))
+	map = ft_get_map(fd);
+	if (!map)
+		return (1);
+	int i = 0;
+	while (map[i] != NULL)
 	{
-		printf("%s", map[map_i]);
-		map_i++;
-		full_map_size++;
+		printf("%s\n", map[i]);
+		i++;
 	}
-	printf("\n");
-	ft_mapcheck(map, full_map_size);
-	map_i = 0;
-	while (map[map_i])
-	{
-		free(map[map_i]);
-		map_i++;
-	}
+	printf("i = %d\n", i);
+	free(map);
 	return 0;
 }

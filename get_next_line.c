@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikardi <ikardi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/01 16:20:00 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/01/28 23:16:04 by ikardi           ###   ########.fr       */
+/*   Created: 2024/12/22 15:03:53 by mteffahi          #+#    #+#             */
+/*   Updated: 2025/01/29 17:17:37 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*ft_next_line(char *buffer)
 	if (buffer[i] == '\0')
 		return (free(buffer), buffer = NULL);
 	j = ft_strlen(buffer) - i;
-	rem = (char *)malloc(j + 1);
+	rem = (char *)malloc(j);
 	if (!rem)
 		return (free(buffer), buffer = NULL);
 	j = 0;
@@ -34,7 +34,7 @@ static char	*ft_next_line(char *buffer)
 	while (buffer[i])
 		rem[j++] = buffer[i++];
 	rem[j] = '\0';
-	return (free(buffer), rem);
+	return (free(buffer), buffer = NULL, rem);
 }
 
 char	*ft_inc(char *bf, char *buffer, int nl, int i)
@@ -88,29 +88,33 @@ static char	*ft_reading(char *buffer, char *remainder, int fd)
 			break ;
 	}
 	if (rd < 0)
+	{
 		return (free(remainder), NULL);
+	}
 	return (remainder);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*remainder[10240];
+	static char	*remainder;
 	char		*buffer;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (free(remainder), remainder = NULL);
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (free(remainder[fd]), NULL);
-	remainder[fd] = ft_reading(buffer, remainder[fd], fd);
+		return (free(remainder), NULL);
+	remainder = ft_reading(buffer, remainder, fd);
 	free(buffer);
 	buffer = NULL;
-	if (!remainder[fd])
+	if (!remainder)
 		return (NULL);
-	line = ft_nl(remainder[fd]);
+	line = ft_nl(remainder);
 	if (!line)
-		return (free(remainder[fd]), remainder[fd] = NULL);
-	remainder[fd] = ft_next_line(remainder[fd]);
+	{
+		return (free(remainder), remainder = NULL);
+	}
+	remainder = ft_next_line(remainder);
 	return (line);
 }
