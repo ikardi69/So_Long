@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikardi <ikardi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/01/29 20:29:28 by ikardi           ###   ########.fr       */
+/*   Updated: 2025/01/30 17:15:45 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int     ft_atoi(const char *str);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
-int     ft_rows_check(char *const *map);
+int     ft_strncmp(const char *s1, const char *s2, size_t n);
+int     len_check(char *const *map);
+char    **ft_fail_free(char **s);
 
 #endif

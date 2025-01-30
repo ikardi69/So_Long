@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parcing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikardi <ikardi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/01/29 20:33:08 by ikardi           ###   ########.fr       */
+/*   Updated: 2025/01/30 19:33:24 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	len_check(char *const *map)
+int	len_check(char *const *map)
 {
 	int	y;
 
@@ -24,39 +24,6 @@ static int	len_check(char *const *map)
 		y++;
 	}
 	return (0);
-}
-
-static int	player_safty_check(char *const *map, int x, int y)
-{
-	if (map[y][x] == 'P' && map[y - 1][x] == '1' && map[y][x - 1] == '1'
-		&& map[y + 1][x] == '1' && map[y][x + 1] == '1')
-		return (1);
-	else
-		return (0);
-}
-
-int	ft_map_check(char *const *map)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	if (len_check(map))
-		return (write(1, "not valid\n", 10), 1);
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (ft_rows_check(map))
-				return (1);
-			else if (y == 0 && map[y][x] == 'P' && player_safty_check(map, x, y))
-				return (1);
-			x++;
-		}
-		y++;
-	}
-	return (write(1, "valid :D\n", 10), 0);
 }
 
 char	**ft_get_map(int fd)
@@ -79,25 +46,61 @@ char	**ft_get_map(int fd)
 	return (free(map), result);
 }
 
+typedef struct s_palyer
+{
+	int x;
+	int y;
+	char **map;
+}t_player;
+
+void	ft_find_player(t_player *p)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (p->map[i])
+	{
+		j = 0;
+		while (p->map[i][j])
+		{
+			if (p->map[i][j] == 'P')
+			{
+				p->x = j;
+				p->y = i;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	ft_print_map(char **map);
+char	**ft_map_cpy(char **map);
+void	ft_find_player(t_player *p);
+void	ft_flood_fill(char **map, int y, int x);
+
 int main(int argc, char **argv)
 {
 	int		fd;
 	char	**map;
-
+	t_player p;
+	
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (write(1, "Error\nUnable to open file", 26), 1);
 	map = ft_get_map(fd);
 	if (!map)
 		return (1);
-	ft_map_check(map);
-	int i = 0;
-	while (map[i] != NULL)
-	{
-		printf("%s\n", map[i]);
-		free(map[i]);
-		i++;
-	}
+	// ft_map_check(map);
+	char **map2 = ft_map_cpy(map);
+	p.map = map2;
+	ft_find_player(&p);
+	// printf("Player x = %d y = %d\n", p.x, p.y);
+	ft_flood_fill(map2, p.y, p.x);
+	ft_print_map(map2);
 	free(map);
+	free(map2);
 	return (close(fd), 0);
 }
