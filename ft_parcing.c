@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parcing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikardi <ikardi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/01/29 18:18:51 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/01/29 20:33:08 by ikardi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,19 @@ static int	len_check(char *const *map)
 	while (map[y])
 	{
 		if (map[y + 1] != NULL && ft_strlen(map[y]) != ft_strlen(map[y + 1]))
-			return (write(1, "not valid\n", 10), 1);
+			return (1);
 		y++;
 	}
 	return (0);
+}
+
+static int	player_safty_check(char *const *map, int x, int y)
+{
+	if (map[y][x] == 'P' && map[y - 1][x] == '1' && map[y][x - 1] == '1'
+		&& map[y + 1][x] == '1' && map[y][x + 1] == '1')
+		return (1);
+	else
+		return (0);
 }
 
 int	ft_map_check(char *const *map)
@@ -39,11 +48,10 @@ int	ft_map_check(char *const *map)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == 'P' && map[y - 1][x] == '1' && map[y][x - 1] == '1'
-				&& map[y + 1][x] == '1' && map[y][x + 1] == '1')
-				return (write(1, "not valid\n", 11), 1);
-			if (y == 0 && map[y][x] != '1')
-				return (write(1, "not valid\n", 11), 1);
+			if (ft_rows_check(map))
+				return (1);
+			else if (y == 0 && map[y][x] == 'P' && player_safty_check(map, x, y))
+				return (1);
 			x++;
 		}
 		y++;
