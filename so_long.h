@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/01/30 23:06:48 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:51:26 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ typedef struct s_palyer
 	char **map;
 }t_player;
 
+typedef struct s_resources
+{
+	int	coins;
+	int	exit;
+	int	player;
+}t_resources;
+
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
 int 	ft_strlen(const char *s);
@@ -47,5 +54,6 @@ void	ft_find_player(t_player *p);
 void	ft_flood_fill(char **map, int y, int x);
 int     ft_map_check(char **map);
 int     ft_rows_len_check(char **map);
+int		collectibles_check(t_resources *rs, char **map);
 
 #endif

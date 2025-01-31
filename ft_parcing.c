@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/01/30 23:52:36 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:23:56 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ void	ft_find_player(t_player *p)
 
 int main(int argc, char **argv)
 {
-	int		fd;
-	char	**map;
-	char	**map2;
-	t_player p;
+	int			fd;
+	char		**map;
+	char		**map2;
+	t_player 	p;
+	t_resources	rs;
 	
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
@@ -87,11 +88,15 @@ int main(int argc, char **argv)
 		return (ft_fail_free(map), 1);
 	p.map = map2;
 	ft_find_player(&p);
+	ft_print_map(map2);
+	printf("\n");
+	if (collectibles_check(&rs, map2))
+		return (write(1, "Not a valid map\n", 17), ft_fail_free(map), ft_fail_free(map2), close(fd), 0);
 	ft_flood_fill(map2, p.y, p.x);
 	ft_print_map(map2);
 	if (ft_map_check(map2))
-		return (write(1, "Not a valid map\n", 17), close(fd), 0);
+		return (write(1, "Not a valid map\n", 17), ft_fail_free(map), ft_fail_free(map2), close(fd), 0);
 	else
 		printf("vaalid\n");
-	return (ft_fail_free(map), close(fd), 0);
+	return (ft_fail_free(map), ft_fail_free(map2), close(fd), 0);
 }
