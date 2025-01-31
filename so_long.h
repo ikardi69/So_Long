@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/01/30 17:15:45 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/01/30 23:06:48 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # endif
 # define LL_MAX 9223372036854775807LL
 
+typedef struct s_palyer
+{
+	int x;
+	int y;
+	char **map;
+}t_player;
+
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
 int 	ft_strlen(const char *s);
@@ -34,5 +41,11 @@ char	**ft_split(char const *s, char c);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
 int     len_check(char *const *map);
 char    **ft_fail_free(char **s);
+void	ft_print_map(char **map);
+char	**ft_map_cpy(char **map);
+void	ft_find_player(t_player *p);
+void	ft_flood_fill(char **map, int y, int x);
+int     ft_map_check(char **map);
+int     ft_rows_len_check(char **map);
 
 #endif
