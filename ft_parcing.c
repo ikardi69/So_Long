@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/01/31 18:23:56 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:55:02 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	len_check(char *const *map)
 {
-	int	y;
+	int	j;
 
-	y = 0;
-	while (map[y])
+	j = 0;
+	while (map[j])
 	{
-		if (map[y + 1] != NULL && ft_strlen(map[y]) != ft_strlen(map[y + 1]))
+		if (map[j + 1] != NULL && ft_strlen(map[j]) != ft_strlen(map[j + 1]))
 			return (1);
-		y++;
+		j++;
 	}
 	return (0);
 }
@@ -69,34 +69,47 @@ void	ft_find_player(t_player *p)
 	}
 }
 
+t_player	*ft_struct(int fd)
+{
+	t_player	*r;
+
+	r = (t_player *)malloc(sizeof(t_player));
+	if (!r)
+		return (NULL);
+	r->coins = 0;
+	r->exit = 0;
+	r->x = 0;
+	r->y = 0;
+	r->map = ft_get_map(fd);
+	if (!r->map)
+		return (free(r), NULL);
+	r->map_cpy = ft_map_cpy(r->map);
+	if (!r->map_cpy)
+		return (free(r), NULL);
+	return (r);
+}
+
 int main(int argc, char **argv)
 {
 	int			fd;
-	char		**map;
-	char		**map2;
-	t_player 	p;
-	t_resources	rs;
+	t_player 	*p;
 	
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (write(1, "Error\nUnable to open file", 26), 1);
-	map = ft_get_map(fd);
-	if (!map)
+	p = ft_struct(fd);
+	if (!p)
 		return (1);
-	map2 = ft_map_cpy(map);
-	if (!map2)
-		return (ft_fail_free(map), 1);
-	p.map = map2;
-	ft_find_player(&p);
-	ft_print_map(map2);
+	ft_find_player(p);
+	ft_print_map(p->map);
 	printf("\n");
-	if (collectibles_check(&rs, map2))
-		return (write(1, "Not a valid map\n", 17), ft_fail_free(map), ft_fail_free(map2), close(fd), 0);
-	ft_flood_fill(map2, p.y, p.x);
-	ft_print_map(map2);
-	if (ft_map_check(map2))
-		return (write(1, "Not a valid map\n", 17), ft_fail_free(map), ft_fail_free(map2), close(fd), 0);
+	if (collectibles_check(p))
+		return (write(1, "Not a valid map\n", 17), ft_finish_free(p), close(fd), 0);
+	ft_flood_fill(p->map_cpy, p->y, p->x);
+	ft_print_map(p->map_cpy);
+	if (ft_map_check(p->map_cpy))
+		return (write(1, "Not a valid map\n", 17), ft_finish_free(p), close(fd), 0);
 	else
 		printf("vaalid\n");
-	return (ft_fail_free(map), ft_fail_free(map2), close(fd), 0);
+	return (close(fd), ft_finish_free(p), 0);
 }
