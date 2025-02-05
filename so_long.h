@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/01 14:29:16 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:11:12 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include "../mlx/mlx.h"
 #include <stdio.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -23,13 +26,15 @@
 
 typedef struct s_palyer
 {
-	int x;
-	int y;
-	int	coins;
-	int	exit;
-	int	player;
-	char **map;
-	char **map_cpy;
+	int		x;
+	int		y;
+	int		coins;
+	int		exit;
+	int		player;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	char	**map;
+	char	**map_cpy;
 }t_player;
 
 char		*get_next_line(int fd);
@@ -54,5 +59,8 @@ int     	ft_rows_len_check(char **map);
 int			collectibles_check(t_player *rs);
 t_player	*ft_struct(int fd);
 void		ft_finish_free(t_player *r);
+void		ft_maplen(t_player *f_map);
+void		ft_open_window(t_player *game);
+int			handle_keypress(int keycode, t_player *game);
 
 #endif

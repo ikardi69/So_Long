@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/01 15:07:13 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:44:29 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,12 @@ void	ft_finish_free(t_player *r)
 	}
 	free(r->map_cpy);
 	free(r);
+}
+
+void	ft_maplen(t_player *f_map)
+{
+	f_map->x = ft_strlen(f_map->map[0]);
+	f_map->y = 0;
+	while (f_map->map[f_map->y])
+		f_map->y++;
 }

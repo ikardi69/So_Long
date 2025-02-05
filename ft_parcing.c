@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/01 15:55:02 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:59:21 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int main(int argc, char **argv)
 {
 	int			fd;
 	t_player 	*p;
+	(void)argc;
 	
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
@@ -111,5 +112,6 @@ int main(int argc, char **argv)
 		return (write(1, "Not a valid map\n", 17), ft_finish_free(p), close(fd), 0);
 	else
 		printf("vaalid\n");
+	ft_open_window(p);
 	return (close(fd), ft_finish_free(p), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:14:25 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/01 15:40:37 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:29:08 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,8 @@ int	ft_map_check(char **map)
 int	ft_rows_len_check(char **map)
 {
 	int	y;
-	int	x;
 	int	len;
 
-	x = 0;
 	y = 0;
 	len = ft_strlen(map[y]);
 	while (map[y])

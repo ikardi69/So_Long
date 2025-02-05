@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 20:25:05 by ikardi            #+#    #+#             */
-/*   Updated: 2025/01/30 23:30:10 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:28:35 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	ft_print_map(char **map2)
 
 void	ft_flood_fill(char **map, int y, int x)
 {
-	int row;
+	// int row;
 
-	row = ft_rowslen(map);
+	// row = ft_rowslen(map);
 	if (y < 0 || x < 0 || !map[y] || !map[y][x])
 		return ;
 	if (map[y][x] == '0' || map[y][x] == 'P' || map[y][x] == 'E' || map[y][x] == 'C')
