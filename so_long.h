@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/05 18:23:57 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:42:54 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 
 # define TILE_SIZE 50
 
+typedef struct s_mlx
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+}t_mlx;
+
 typedef struct s_game
 {
 	int		x;
@@ -33,10 +39,9 @@ typedef struct s_game
 	int		coins;
 	int		exit;
 	int		player;
-	void	*mlx_ptr;
-	void	*win_ptr;
 	char	**map;
 	char	**map_cpy;
+	struct s_mlx	*ft_mlx;
 }t_game;
 
 char		*get_next_line(int fd);

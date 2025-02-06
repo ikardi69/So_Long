@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/05 17:56:13 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:49:45 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ t_game	*ft_struct(int fd)
 	r = (t_game *)malloc(sizeof(t_game));
 	if (!r)
 		return (NULL);
+	r->ft_mlx = (t_mlx *)malloc(sizeof(t_mlx));
+	if (!r)
+		return (free(r), NULL);
 	r->coins = 0;
 	r->exit = 0;
 	r->x = 0;

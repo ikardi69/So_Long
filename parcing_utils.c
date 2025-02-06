@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 20:25:05 by ikardi            #+#    #+#             */
-/*   Updated: 2025/02/04 18:28:35 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:30:34 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ void	ft_print_map(char **map2)
 
 void	ft_flood_fill(char **map, int y, int x)
 {
-	// int row;
-
-	// row = ft_rowslen(map);
 	if (y < 0 || x < 0 || !map[y] || !map[y][x])
 		return ;
 	if (map[y][x] == '0' || map[y][x] == 'P' || map[y][x] == 'E' || map[y][x] == 'C')
@@ -78,12 +75,7 @@ char **ft_map_alloc(char **map)
 		return (NULL);
 	i = 0;
 	while (map[i])
-	{
-		map_cp[i] = (char *)malloc((ft_strlen(map[i]) + 1));
-		if (!map_cp[i])
-			return (ft_fail_free(map_cp), NULL);
 		i++;
-	}
 	map_cp[i] = NULL;
 	return (map_cp);
 }
@@ -91,23 +83,17 @@ char **ft_map_alloc(char **map)
 char	**ft_map_cpy(char **map)
 {
 	int		y;
-	int		x;
 	char	**map_cp;
 
 	map_cp = ft_map_alloc(map);
 	if (!map_cp)
 		return (NULL);
-	y = 0;
-	while (map[y])
+	y = -1;
+	while (map[++y])
 	{
-		x = 0;
-		while (map[y][x])
-		{
-			map_cp[y][x] = map[y][x];
-			x++;
-		}
-		map_cp[y][x] = '\0';
-		y++;
+		map_cp[y] = ft_strdup(map[y]);
+		if (!map_cp[y])
+			return (ft_fail_free(map_cp), NULL);
 	}
 	return (map_cp);
 }
