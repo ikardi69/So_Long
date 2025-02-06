@@ -6,13 +6,13 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/04 18:44:29 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:56:48 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	col_check_helper(t_player *p)
+static int	col_check_helper(t_game *p)
 {
 	if (p->coins <= 0)
 		return (1);
@@ -23,7 +23,7 @@ static int	col_check_helper(t_player *p)
 	return (0);
 }
 
-int	collectibles_check(t_player *rs)
+int	collectibles_check(t_game *rs)
 {
 	int j;
 	int i;
@@ -52,7 +52,7 @@ int	collectibles_check(t_player *rs)
 		return (0);
 }
 
-void	ft_finish_free(t_player *r)
+void	ft_finish_free(t_game *r)
 {
 	int	i;
 
@@ -73,7 +73,7 @@ void	ft_finish_free(t_player *r)
 	free(r);
 }
 
-void	ft_maplen(t_player *f_map)
+void	ft_maplen(t_game *f_map)
 {
 	f_map->x = ft_strlen(f_map->map[0]);
 	f_map->y = 0;

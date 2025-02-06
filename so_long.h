@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/05 14:11:12 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:23:57 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 # endif
 # define LL_MAX 9223372036854775807LL
 
-typedef struct s_palyer
+# define TILE_SIZE 50
+
+typedef struct s_game
 {
 	int		x;
 	int		y;
@@ -35,7 +37,7 @@ typedef struct s_palyer
 	void	*win_ptr;
 	char	**map;
 	char	**map_cpy;
-}t_player;
+}t_game;
 
 char		*get_next_line(int fd);
 char		*ft_strjoin(char *s1, char *s2);
@@ -52,15 +54,15 @@ int     	len_check(char *const *map);
 char    	**ft_fail_free(char **s);
 void		ft_print_map(char **map);
 char		**ft_map_cpy(char **map);
-void		ft_find_player(t_player *p);
+void		ft_find_player(t_game *p);
 void		ft_flood_fill(char **map, int y, int x);
 int     	ft_map_check(char **map);
 int     	ft_rows_len_check(char **map);
-int			collectibles_check(t_player *rs);
-t_player	*ft_struct(int fd);
-void		ft_finish_free(t_player *r);
-void		ft_maplen(t_player *f_map);
-void		ft_open_window(t_player *game);
-int			handle_keypress(int keycode, t_player *game);
+int			collectibles_check(t_game *rs);
+t_game		*ft_struct(int fd);
+void		ft_finish_free(t_game *r);
+void		ft_maplen(t_game *f_map);
+void		ft_open_window(t_game *game);
+int			handle_keypress(int keycode, t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/05 13:59:21 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:56:13 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**ft_get_map(int fd)
 	return (free(map), result);
 }
 
-void	ft_find_player(t_player *p)
+void	ft_find_player(t_game *p)
 {
 	int i;
 	int j;
@@ -69,11 +69,11 @@ void	ft_find_player(t_player *p)
 	}
 }
 
-t_player	*ft_struct(int fd)
+t_game	*ft_struct(int fd)
 {
-	t_player	*r;
+	t_game	*r;
 
-	r = (t_player *)malloc(sizeof(t_player));
+	r = (t_game *)malloc(sizeof(t_game));
 	if (!r)
 		return (NULL);
 	r->coins = 0;
@@ -92,7 +92,7 @@ t_player	*ft_struct(int fd)
 int main(int argc, char **argv)
 {
 	int			fd;
-	t_player 	*p;
+	t_game 	*p;
 	(void)argc;
 	
 	fd = open(argv[1], O_RDONLY);
