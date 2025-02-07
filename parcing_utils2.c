@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/05 17:56:48 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:11:22 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_finish_free(t_game *r)
 	free(r);
 }
 
-void	ft_maplen(t_game *f_map)
+void	ft_maplen(t_mlx *f_map)
 {
 	f_map->x = ft_strlen(f_map->map[0]);
 	f_map->y = 0;

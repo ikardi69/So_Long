@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/06 20:42:54 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:31:43 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,24 @@ typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+
+
+	int		map_width;
+	int		map_height;
+	int		x;
+	int		y;
+
+
+	char	**map;
+	void	*wall;
+	void	*ground;
+	void	*coin;
+	void	*exit;
+	void	*player;
+	int		player_x;
+	int		player_y;
+	int		coin_count;
+	int		moves_count;
 }t_mlx;
 
 typedef struct s_game
@@ -65,9 +83,11 @@ int     	ft_map_check(char **map);
 int     	ft_rows_len_check(char **map);
 int			collectibles_check(t_game *rs);
 t_game		*ft_struct(int fd);
+t_mlx		*ft_mlx_struct(t_game *r);
 void		ft_finish_free(t_game *r);
-void		ft_maplen(t_game *f_map);
-void		ft_open_window(t_game *game);
+void		ft_maplen(t_mlx *f_map);
+void		ft_open_window(t_mlx *game);
 int			handle_keypress(int keycode, t_game *game);
+void		ft_render_map(t_mlx	*mlx);
 
 #endif

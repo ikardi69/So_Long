@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/06 15:49:45 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:13:22 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_game	*ft_struct(int fd)
 	r->map_cpy = ft_map_cpy(r->map);
 	if (!r->map_cpy)
 		return (free(r), NULL);
+	r->ft_mlx = ft_mlx_struct(r);
 	return (r);
 }
 
@@ -115,6 +116,6 @@ int main(int argc, char **argv)
 		return (write(1, "Not a valid map\n", 17), ft_finish_free(p), close(fd), 0);
 	else
 		printf("vaalid\n");
-	ft_open_window(p);
+	ft_open_window(p->ft_mlx);
 	return (close(fd), ft_finish_free(p), 0);
 }
