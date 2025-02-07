@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/07 17:48:56 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:24:32 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	ft_open_window(t_mlx *game)
 {
 	game->mlx_ptr = mlx_init();
-	mlx_xpm_file_to_image(game->mlx_ptr, "./images/coin.xpm", &game->map_width, &game->map_height);
-	mlx_xpm_file_to_image(game->mlx_ptr, "./images/wall.xpm", &game->map_width, &game->map_height);
-	mlx_xpm_file_to_image(game->mlx_ptr, "./images/ground.xpm", &game->map_width, &game->map_height);
-	mlx_xpm_file_to_image(game->mlx_ptr, "./images/exit.xpm", &game->map_width, &game->map_height);
-	mlx_xpm_file_to_image(game->mlx_ptr, "./images/player.xpm", &game->map_width, &game->map_height);
+	game->coin = mlx_xpm_file_to_image(game->mlx_ptr, "./images/coin.xpm", &game->map_width, &game->map_height);
+	game->wall = mlx_xpm_file_to_image(game->mlx_ptr, "./images/wall.xpm", &game->map_width, &game->map_height);
+	game->ground = mlx_xpm_file_to_image(game->mlx_ptr, "./images/ground.xpm", &game->map_width, &game->map_height);
+	game->exit = mlx_xpm_file_to_image(game->mlx_ptr, "./images/exit.xpm", &game->map_width, &game->map_height);
+	game->player = mlx_xpm_file_to_image(game->mlx_ptr, "./images/player.xpm", &game->map_width, &game->map_height);
 	if (!game->coin || !game->wall || !game->ground || !game->exit || !game->player)
 	{
 		write(1, "Error loading images\n", 21);
