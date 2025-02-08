@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/07 17:13:22 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/08 18:03:49 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ int main(int argc, char **argv)
 	else
 		printf("vaalid\n");
 	ft_open_window(p->ft_mlx);
+	//mlx_key_hook
 	return (close(fd), ft_finish_free(p), 0);
 }

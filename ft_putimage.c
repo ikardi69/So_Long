@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/07 18:27:52 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:47:44 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_open_window(t_mlx *game)
 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->x, game->y, "So_long");
 	mlx_key_hook(game->win_ptr , handle_keypress, game);
 	ft_render_map(game);
+	// if (handle_keypress == 1)
+	// 	return ;
 	mlx_loop(game->mlx_ptr);
 }
 
@@ -65,9 +67,10 @@ void	ft_render_map(t_mlx	*mlx)
 
 int handle_keypress(int keycode, t_game *game)
 {
-    if (keycode == 53)  // ESC key
+    if (keycode == 65307)  // ESC key
 	{
         mlx_destroy_window(game->ft_mlx->mlx_ptr, game->ft_mlx->win_ptr);
+		return (1);
 		exit(0);
 	}
     return (0);
