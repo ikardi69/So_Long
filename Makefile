@@ -20,7 +20,8 @@ SRCS = ft_parcing.c \
        parcing_utils.c \
        parcing_utils1.c \
        parcing_utils2.c \
-       ft_putimage.c
+       ft_putimage.c \
+       ft_util.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)

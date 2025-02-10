@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/08 18:03:49 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:46:17 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	ft_find_player(t_game *p)
 			{
 				p->x = j;
 				p->y = i;
+				p->ft_mlx->player_y = i;
+				p->ft_mlx->player_x = j;
 				return ;
 			}
 			j++;
@@ -116,6 +118,7 @@ int main(int argc, char **argv)
 		return (write(1, "Not a valid map\n", 17), ft_finish_free(p), close(fd), 0);
 	else
 		printf("vaalid\n");
+	ft_find_player(p);
 	ft_open_window(p->ft_mlx);
 	//mlx_key_hook
 	return (close(fd), ft_finish_free(p), 0);
