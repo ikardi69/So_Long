@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/10 17:46:17 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:43:30 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_game	*ft_struct(int fd)
 	if (!r)
 		return (NULL);
 	r->ft_mlx = (t_mlx *)malloc(sizeof(t_mlx));
-	if (!r)
+	if (!r->ft_mlx)
 		return (free(r), NULL);
 	r->coins = 0;
 	r->exit = 0;
@@ -119,7 +119,7 @@ int main(int argc, char **argv)
 	else
 		printf("vaalid\n");
 	ft_find_player(p);
-	ft_open_window(p->ft_mlx);
+	ft_open_window(p);
 	//mlx_key_hook
 	return (close(fd), ft_finish_free(p), 0);
 }

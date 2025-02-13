@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/10 16:41:10 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:42:59 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ t_game		*ft_struct(int fd);
 t_mlx		*ft_mlx_struct(t_game *r);
 void		ft_finish_free(t_game *r);
 void		ft_maplen(t_mlx *f_map);
-void		ft_open_window(t_mlx *game);
-int			handle_keypress(int keycode, t_game *game);
+void		ft_open_window(t_game *game);
+int			handle_keypress(int keycode, t_mlx *game);
 void		ft_render_map(t_mlx	*mlx);
 // void		ft_mlx_find_player(t_mlx *p);
 void		ft_putnbr(int n);
