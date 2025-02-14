@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/12 17:36:18 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:51:28 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	collectibles_check(t_game *rs)
 
 static void	ft_mlx_free(t_mlx *game)
 {
+	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	mlx_destroy_image(game->mlx_ptr, game->wall);
 	mlx_destroy_image(game->mlx_ptr, game->coin);
 	mlx_destroy_image(game->mlx_ptr, game->ground);
@@ -61,26 +62,26 @@ static void	ft_mlx_free(t_mlx *game)
 	mlx_destroy_image(game->mlx_ptr, game->player);
 }
 
-void	ft_finish_free(t_game *r)
+void	ft_finish_free(t_mlx *r)
 {
 	int	i;
 
 	i = 0;
-	while (r->map[i])
+	while (r->ft_game->map[i])
 	{
-		free(r->map[i]);
+		free(r->ft_game->map[i]);
 		i++;
 	}
-	free(r->map);
+	free(r->ft_game->map);
 	i = 0;
-	while (r->map_cpy[i])
+	while (r->ft_game->map_cpy[i])
 	{
-		free(r->map_cpy[i]);
+		free(r->ft_game->map_cpy[i]);
 		i++;
 	}
-	free(r->map_cpy);
-	ft_mlx_free(r->ft_mlx);
-	free(r->ft_mlx);
+	free(r->ft_game->map_cpy);
+	ft_mlx_free(r->ft_game->ft_mlx);
+	free(r->ft_game);
 	free(r);
 }
 

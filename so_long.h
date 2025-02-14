@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/12 17:42:59 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:39:52 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,27 @@
 
 typedef struct s_mlx
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
+	void			*mlx_ptr;
+	void			*win_ptr;
 
 
-	int		map_width;
-	int		map_height;
-	int		x;
-	int		y;
+	int				map_width;
+	int				map_height;
+	int				x;
+	int				y;
 
 
-	char	**map;
-	void	*wall;
-	void	*ground;
-	void	*coin;
-	void	*exit;
-	void	*player;
-	int		player_x;
-	int		player_y;
-	int		coin_count;
-	int		moves_count;
+	char			**map;
+	void			*wall;
+	void			*ground;
+	void			*coin;
+	void			*exit;
+	void			*player;
+	int				player_x;
+	int				player_y;
+	int				coin_count;
+	int				moves_count;
+	struct s_game	*ft_game;
 }t_mlx;
 
 typedef struct s_game
@@ -84,7 +85,7 @@ int     	ft_rows_len_check(char **map);
 int			collectibles_check(t_game *rs);
 t_game		*ft_struct(int fd);
 t_mlx		*ft_mlx_struct(t_game *r);
-void		ft_finish_free(t_game *r);
+void		ft_finish_free(t_mlx *r);
 void		ft_maplen(t_mlx *f_map);
 void		ft_open_window(t_game *game);
 int			handle_keypress(int keycode, t_mlx *game);
@@ -93,5 +94,7 @@ void		ft_render_map(t_mlx	*mlx);
 void		ft_putnbr(int n);
 void		ft_putstr(char *s);
 void		ft_putchar(char c);
+
+void	ft_printf_ptr_adresses(t_mlx *game);
 
 #endif

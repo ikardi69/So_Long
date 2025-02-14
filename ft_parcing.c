@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/12 17:43:30 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/14 13:12:36 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_get_map(int fd)
 
 	map = get_next_line(fd);
 	if (!map)														// Handling empty file
-		return (close(fd), write(1, "Error\nEmpty file\n", 18), NULL);
+		return (close(fd), ft_putstr("Error\nEmpty file\n"), NULL);
 	while ((buffer = get_next_line(fd)) != NULL)
 	{
 		map = ft_strjoin(map, buffer);
@@ -95,6 +95,21 @@ t_game	*ft_struct(int fd)
 	return (r);
 }
 
+void	ft_printf_ptr_adresses(t_mlx *game)
+{
+	printf("mlx adress : %p\n", game);
+	printf("coins adress : %p\n", game->coin);
+	printf("wall adress : %p\n", game->wall);
+	printf("ground adress : %p\n", game->ground);
+	printf("exit adress : %p\n", game->exit);
+	printf("player adress : %p\n", game->player);
+	printf("map adress : %p\n", game->ft_game->map);
+	printf("map_cpy adress : %p\n", game->ft_game->map_cpy);
+	printf("game adress : %p\n", game->ft_game);
+	printf("mlx_ptr adress : %p\n", game->mlx_ptr);
+	printf("mlx_win_ptr adress : %p\n", game->win_ptr);
+}
+
 int main(int argc, char **argv)
 {
 	int			fd;
@@ -103,7 +118,7 @@ int main(int argc, char **argv)
 	
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (write(1, "Error\nUnable to open file", 26), 1);
+		return (ft_putstr("Error\nUnable to open file"), 1);
 	p = ft_struct(fd);
 	if (!p)
 		return (1);
@@ -111,15 +126,15 @@ int main(int argc, char **argv)
 	ft_print_map(p->map);
 	printf("\n");
 	if (collectibles_check(p))
-		return (write(1, "Not a valid map\n", 17), ft_finish_free(p), close(fd), 0);
+		return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
 	ft_flood_fill(p->map_cpy, p->y, p->x);
 	ft_print_map(p->map_cpy);
 	if (ft_map_check(p->map_cpy))
-		return (write(1, "Not a valid map\n", 17), ft_finish_free(p), close(fd), 0);
+		return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
 	else
 		printf("vaalid\n");
 	ft_find_player(p);
 	ft_open_window(p);
 	//mlx_key_hook
-	return (close(fd), ft_finish_free(p), 0);
+	return (close(fd), ft_finish_free(p->ft_mlx), 0);
 }
