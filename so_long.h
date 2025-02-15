@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/14 12:39:52 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/14 16:26:00 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void		ft_render_map(t_mlx	*mlx);
 void		ft_putnbr(int n);
 void		ft_putstr(char *s);
 void		ft_putchar(char c);
+int			ft_coins_E_check(t_mlx *game);
 
 void	ft_printf_ptr_adresses(t_mlx *game);
 

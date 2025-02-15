@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/14 12:36:41 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:07:39 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,31 @@ void	ft_render_map(t_mlx	*mlx)
 	
 }
 
+static void ft_exit_finish(t_mlx *game)
+{
+	if (ft_coins_E_check(game))
+		return ;
+	ft_putstr("You exited the game before finishing it (weak.)\n");
+	ft_finish_free(game);
+	exit(0);
+}
+
 static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 {
-	game->map[game->player_y][game->player_x] = '0';
-	game->map[new_y][new_x] = 'P';
-	game->player_y = new_y;
-	game->player_x = new_x;
-	game->moves_count++;
-	ft_putstr("Moves: ");
-	ft_putnbr(game->moves_count);
-	ft_putstr("\n");
-	ft_render_map(game);
+	if (game->map[new_y][new_x] == 'E')
+		ft_exit_finish(game);
+	else
+	{
+		game->map[game->player_y][game->player_x] = '0';
+		game->map[new_y][new_x] = 'P';
+		game->player_y = new_y;
+		game->player_x = new_x;
+		game->moves_count++;
+		ft_putstr("Moves: ");
+		ft_putnbr(game->moves_count);
+		ft_putstr("\n");
+		ft_render_map(game);
+	}
 	return ;
 }
 
