@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/14 17:05:02 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/16 16:03:17 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ t_game	*ft_struct(int fd)
 	r->exit = 0;
 	r->x = 0;
 	r->y = 0;
+	r->player = 0;
+	r->enemy = 0;
 	r->map = ft_get_map(fd);
 	if (!r->map)
 		return (free(r), NULL);
@@ -123,6 +125,7 @@ int main(int argc, char **argv)
 	if (!p)
 		return (1);
 	ft_find_player(p);
+	ft_find_enemy(p->ft_mlx);
 	ft_print_map(p->map);
 	printf("\n");
 	if (collectibles_check(p))

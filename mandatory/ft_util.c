@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:28:12 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/14 16:30:02 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/15 20:45:03 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 t_mlx	*ft_mlx_struct(t_game *r)
 {
-	// t_mlx	*m;
-
-	// m = (t_mlx *)malloc(sizeof(t_mlx));
-	// if (!m)
-	// 	return (NULL);
 	r->ft_mlx->map = r->map;
 	ft_find_player(r);
 	r->ft_mlx->coin_count = 0;

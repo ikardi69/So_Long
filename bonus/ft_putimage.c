@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/14 17:07:39 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/16 18:26:15 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	ft_open_window(t_game *game)
 	game->ft_mlx->ground = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./images/ground.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->exit = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./images/exit.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->player = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./images/player.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
-	if (!game->ft_mlx->coin || !game->ft_mlx->wall || !game->ft_mlx->ground || !game->ft_mlx->exit || !game->ft_mlx->player)
+	game->ft_mlx->enemy = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./images/enemy.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
+	if (!game->ft_mlx->coin || !game->ft_mlx->wall || !game->ft_mlx->ground || !game->ft_mlx->exit || !game->ft_mlx->player || !game->ft_mlx->enemy)
 	{
 		ft_putstr("Error loading images\n");
 		return;
@@ -61,6 +62,8 @@ void	ft_render_map(t_mlx	*mlx)
 				img = mlx->exit;
 			else if (mlx->map[y][x] == 'P')
 				img = mlx->player;
+			else if (mlx->map[y][x] == 'N')
+				img = mlx->enemy;
 			mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img, x * TILE_SIZE, y * TILE_SIZE);
 			x++;
 		}
@@ -68,11 +71,12 @@ void	ft_render_map(t_mlx	*mlx)
 	
 }
 
-static void ft_exit_finish(t_mlx *game)
+static void ft_exit_finish(t_mlx *game, int new_y, int new_x)
 {
 	if (ft_coins_E_check(game))
 		return ;
-	ft_putstr("You exited the game before finishing it (weak.)\n");
+	if (game->map[new_y][new_x] != 'E')
+		ft_putstr("You exited the game before finishing it (weak.)\n");
 	ft_finish_free(game);
 	exit(0);
 }
@@ -80,9 +84,10 @@ static void ft_exit_finish(t_mlx *game)
 static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 {
 	if (game->map[new_y][new_x] == 'E')
-		ft_exit_finish(game);
+		ft_exit_finish(game, new_y, new_x);
 	else
 	{
+		ft_enemy_movment(game);
 		game->map[game->player_y][game->player_x] = '0';
 		game->map[new_y][new_x] = 'P';
 		game->player_y = new_y;
@@ -110,7 +115,7 @@ int handle_keypress(int keycode, t_mlx *game)
     if (keycode == 65307)
 	{
 		ft_putstr("You exited the game before finishing it (weak.)\n");
-		ft_printf_ptr_adresses(game);
+		// ft_printf_ptr_adresses(game);
 		ft_finish_free(game);
 		return (exit(0), 1);
 	}
