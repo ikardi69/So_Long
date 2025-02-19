@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parcing.c                                       :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/16 16:03:17 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:27:18 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	len_check(char *const *map)
 {
@@ -126,16 +126,16 @@ int main(int argc, char **argv)
 		return (1);
 	ft_find_player(p);
 	ft_find_enemy(p->ft_mlx);
-	ft_print_map(p->map);
-	printf("\n");
+	// ft_print_map(p->map);
+	// printf("\n");
 	if (collectibles_check(p))
 		return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
 	ft_flood_fill(p->map_cpy, p->y, p->x);
-	ft_print_map(p->map_cpy);
+	// ft_print_map(p->map_cpy);
 	if (ft_map_check(p->map_cpy))
 		return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
-	else
-		printf("vaalid\n");
+	// else
+	// 	printf("vaalid\n");
 	ft_find_player(p);
 	ft_open_window(p);
 	//mlx_key_hook

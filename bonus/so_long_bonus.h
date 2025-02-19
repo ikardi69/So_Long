@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/16 17:25:10 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:45:33 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,10 @@ void		ft_putstr(char *s);
 void		ft_putchar(char c);
 int			ft_coins_E_check(t_mlx *game);
 void		ft_find_enemy(t_mlx *game);
-void		ft_enemy_movment(t_mlx *game);
+void		ft_enemy_movment(t_mlx *game, int y, int x);
 void		ft_new_e_position_check(t_mlx *game, int new_x, int new_y);
+void		ft_looser_function(t_mlx *game);
+int			update_enemy(t_mlx *game);
 
 void	ft_printf_ptr_adresses(t_mlx *game);
 

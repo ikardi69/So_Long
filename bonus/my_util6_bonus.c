@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   my_util6_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 17:24:32 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/01/29 17:17:59 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:50:46 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -90,4 +90,11 @@ char	*ft_nl(char *buffer)
 	if (!bf)
 		return (NULL);
 	return (ft_inc(bf, buffer, nl, i));
+}
+
+void	ft_looser_function(t_mlx *game)
+{
+	ft_putstr("You lost the game\nGood luck next time\n");
+	ft_finish_free(game);
+	exit(0);
 }

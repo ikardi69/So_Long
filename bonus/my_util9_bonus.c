@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parcing_utils2.c                                   :+:      :+:    :+:   */
+/*   my_util9_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/16 18:24:15 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:27:02 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static int	col_check_helper(t_game *p)
 {
@@ -31,9 +31,6 @@ int	collectibles_check(t_game *rs)
 	int i;
 
 	j = -1;
-	// rs->coins = 0;
-	// rs->exit = 0;
-	// rs->player = 0;
 	while (rs->map_cpy[++j])
 	{
 		i = 0;
@@ -58,12 +55,20 @@ int	collectibles_check(t_game *rs)
 
 static void	ft_mlx_free(t_mlx *game)
 {
-	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	mlx_destroy_image(game->mlx_ptr, game->wall);
-	mlx_destroy_image(game->mlx_ptr, game->coin);
-	mlx_destroy_image(game->mlx_ptr, game->ground);
-	mlx_destroy_image(game->mlx_ptr, game->exit);
-	mlx_destroy_image(game->mlx_ptr, game->player);
+	if (game->win_ptr)
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	if (game->wall)
+		mlx_destroy_image(game->mlx_ptr, game->wall);
+	if (game->coin)
+		mlx_destroy_image(game->mlx_ptr, game->coin);
+	if (game->ground)
+		mlx_destroy_image(game->mlx_ptr, game->ground);
+	if (game->exit)
+		mlx_destroy_image(game->mlx_ptr, game->exit);
+	if (game->player)
+		mlx_destroy_image(game->mlx_ptr, game->player);
+	if (game->enemy)
+		mlx_destroy_image(game->mlx_ptr, game->enemy);
 }
 
 void	ft_finish_free(t_mlx *r)

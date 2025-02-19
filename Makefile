@@ -1,40 +1,41 @@
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 NAME = so_long
+BONUS_NAME = so_long_bonus
 
-SRC_DIR = mandatory
-SRCS = $(addprefix $(SRC_DIR)/, \
-    ft_parcing.c \
-    ft_split.c \
-    ft_strdup.c \
-    get_next_line.c \
-    get_next_line_utils.c \
-    parcing_utils.c \
-    parcing_utils1.c \
-    parcing_utils2.c \
-    ft_putimage.c \
-    ft_util.c)
+MANDATORY_DIR = mandatory/
+BONUS_DIR = bonus/
 
-OBJS = $(SRCS:$(SRC_DIR)/%.c=%.o)
+SRCS = $(wildcard $(MANDATORY_DIR)*.c)
+OBJS = $(SRCS:.c=.o)
 
-MLX_PATH = ./mlx
-MLX_FLAGS = -L$(MLX_PATH) -lmlx_Linux -lX11 -lXext -lm
+BONUS_SRCS = $(wildcard $(BONUS_DIR)*.c)
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX_FLAGS)
-
-%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -I$(MLX_PATH) -I$(SRC_DIR) -c $< -o $@
+MLX_DIR = mlx/
+MLX = $(MLX_DIR)libmlx_Linux.a
+MLX_FLAGS = -Lmlx -lmlx_Linux -lXext -lX11
 
 all: $(NAME)
 
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(MLX) $(MLX_FLAGS) -o $(NAME)
+
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(BONUS_OBJS)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) $(MLX) $(MLX_FLAGS) -o $(BONUS_NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
+
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
