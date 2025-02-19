@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/17 15:27:18 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:50:58 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ t_game	*ft_struct(int fd)
 	r->map_cpy = ft_map_cpy(r->map);
 	if (!r->map_cpy)
 		return (free(r), NULL);
+	r->enemies_location = ft_set_the_head();
+	if (!r->enemies_location)
+		return (NULL);
 	r->ft_mlx = ft_mlx_struct(r);
 	return (r);
 }
@@ -125,7 +128,6 @@ int main(int argc, char **argv)
 	if (!p)
 		return (1);
 	ft_find_player(p);
-	ft_find_enemy(p->ft_mlx);
 	// ft_print_map(p->map);
 	// printf("\n");
 	if (collectibles_check(p))
@@ -137,6 +139,7 @@ int main(int argc, char **argv)
 	// else
 	// 	printf("vaalid\n");
 	ft_find_player(p);
+	ft_set_enemies_location(p);
 	ft_open_window(p);
 	//mlx_key_hook
 	return (close(fd), ft_finish_free(p->ft_mlx), 0);

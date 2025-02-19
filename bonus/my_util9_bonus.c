@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/18 15:27:02 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:38:53 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	ft_finish_free(t_mlx *r)
 		i++;
 	}
 	free(r->ft_game->map_cpy);
-	ft_mlx_free(r->ft_game->ft_mlx);
+	ft_mlx_free(r);
+	ft_lstclear(&(r->ft_game->enemies_location), free);
 	free(r->ft_game);
 	free(r);
 }

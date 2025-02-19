@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/18 16:45:33 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:51:16 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@
 # define LL_MAX 9223372036854775807LL
 
 # define TILE_SIZE 50
+
+typedef struct s_enemy
+{
+	int				y;
+	int				x;
+	struct s_enemy *next;
+}t_enemy;
 
 typedef struct s_mlx
 {
@@ -47,8 +54,6 @@ typedef struct s_mlx
 	void			*enemy;
 	int				player_x;
 	int				player_y;
-	int				enemy_x;
-	int				enemy_y;
 	int				coin_count;
 	int				moves_count;
 	struct s_game	*ft_game;
@@ -56,14 +61,15 @@ typedef struct s_mlx
 
 typedef struct s_game
 {
-	int		x;
-	int		y;
-	int		coins;
-	int		exit;
-	int		player;
-	char	**map;
-	char	**map_cpy;
-	int		enemy;
+	int				x;
+	int				y;
+	int				coins;
+	int				exit;
+	int				player;
+	char			**map;
+	char			**map_cpy;
+	int				enemy;
+	struct s_enemy	*enemies_location;
 	struct s_mlx	*ft_mlx;
 }t_game;
 
@@ -99,11 +105,15 @@ void		ft_putnbr(int n);
 void		ft_putstr(char *s);
 void		ft_putchar(char c);
 int			ft_coins_E_check(t_mlx *game);
-void		ft_find_enemy(t_mlx *game);
-void		ft_enemy_movment(t_mlx *game, int y, int x);
-void		ft_new_e_position_check(t_mlx *game, int new_x, int new_y);
+void		ft_enemy_movment(t_mlx *game, t_enemy *en);
+void		ft_new_e_position_check(t_mlx *game, t_enemy *en, int new_x, int new_y);
 void		ft_looser_function(t_mlx *game);
 int			update_enemy(t_mlx *game);
+void		ft_set_enemies_location(t_game *game);
+t_enemy		*ft_add_location(int y, int x);
+t_enemy		*ft_set_the_head();
+void		ft_lstclear(t_enemy **lst, void (*del)(void*));
+void		ft_lstadd_back(t_enemy **lst, t_enemy *new);
 
 void	ft_printf_ptr_adresses(t_mlx *game);
 

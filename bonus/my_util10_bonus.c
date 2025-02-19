@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 16:24:24 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/18 18:27:01 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:47:22 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,108 @@
 int update_enemy(t_mlx *game)
 {
 	static int  frames = 0;
-	int         y;
-	int         x;
+	t_enemy	*tmp;
+
+	tmp = game->ft_game->enemies_location;
+	frames++;
+	// while (tmp)
+	// {
+	// 	if (frames % 9000 == 0)
+	// 	{
+	// 		ft_enemy_movment(game, tmp);
+	// 		ft_render_map(game);
+	// 	}
+	// 	tmp = tmp->next;
+	// }
+	if (frames % 9009 == 0)
+	{
+		while (tmp)
+		{
+			ft_enemy_movment(game, tmp);
+			tmp = tmp->next;
+		}
+		ft_render_map(game);
+	}
+	return (0);
+}
+
+t_enemy	*ft_add_location(int y, int x)
+{
+	t_enemy	*node;
+
+	node = (t_enemy *)malloc(sizeof(t_enemy));
+	if (!node)
+		return (NULL);
+	node->y = y;
+	node->x = x;
+	node->next = NULL;
+	return (node);
+}
+
+void	ft_set_enemies_location(t_game *game)
+{
+	t_enemy	*n_e;
+	int		y;
+	int		x;
 
 	y = 0;
-	x = 0;
-	frames++;
-	// while (game->map[y])
-	// {
-	// 	x = 0;
-	// 	while (game->map[y][x])
-	// 	{
-	// 		if (game->map[y][x] == 'N')
-	// 		{
-				if (frames % 9000 == 0)
-				{
-					// printf("x = %d, y = %d\n", y, x);
-					ft_enemy_movment(game, y, x);
-					ft_render_map(game);
-					//return (0);
-				}
-	// 		}
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
-	return (0);
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'N')
+			{
+				n_e = ft_add_location(y, x);
+				ft_lstadd_back(&(game->enemies_location), n_e);
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void	ft_lstadd_back(t_enemy **lst, t_enemy *new)
+{
+	t_enemy	*tmp;
+
+	if (!new || !lst)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	tmp = *lst;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
+}
+
+t_enemy		*ft_set_the_head()
+{
+	t_enemy	*head;
+
+	head = (t_enemy *)malloc(sizeof(t_enemy));
+	if (!head)
+		return (NULL);
+	head->y = 0;
+	head->x = 0;
+	head->next = NULL;
+	return (head);
+}
+
+void	ft_lstclear(t_enemy **lst, void (*del)(void*))
+{
+	t_enemy	*temp;
+
+	if (!lst || !del)
+		return ;
+	while (*lst)
+	{
+		temp = (*lst)->next;
+		free(*lst);
+		*lst = temp;
+	}
+	*lst = NULL;
 }

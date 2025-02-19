@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:28:12 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/18 18:26:33 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:50:48 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,41 +54,29 @@ int	ft_coins_E_check(t_mlx *game)
 	return (0);
 }
 
-void	ft_new_e_position_check(t_mlx *game, int new_x, int new_y)
+void	ft_new_e_position_check(t_mlx *game, t_enemy *en, int new_x, int new_y)
 {
 	if (game->map[new_y][new_x] == 'P')
 		ft_looser_function(game);
 	else if (game->map[new_y][new_x] != '1' && game->map[new_y][new_x] != 'E')
 	{
-		game->map[game->enemy_y][game->enemy_x] = '0';
+		game->map[en->y][en->x] = '0';
 		game->map[new_y][new_x] = 'N';
-		game->enemy_x = new_x;
-		game->enemy_y = new_y;
-		// if (game->map[new_y + 1][new_x] != '1')
-		// 	new_y++;
-		// else if (game->map[new_y][new_x + 1] != '1')
-		// 	new_x++;
-		// else if (game->map[new_y - 1][new_x] != '1')
-		// 	new_y--;
-		// else if (game->map[new_y][new_x - 1] != '1')
-		// 	new_x--;
+		en->x = new_x;
+		en->y = new_y;
 	}
-	// else
-	// 	return ;
+	else if (game->map[new_y][new_x] == '1')
+		ft_enemy_movment(game, en);
 }
 
-void	ft_enemy_movment(t_mlx *game, int y, int x)
+void	ft_enemy_movment(t_mlx *game, t_enemy *en)
 {
 	int			new_x;
 	int			new_y;
 	static int	step = 0;
 
-	new_x = game->enemy_x;
-	new_y = game->enemy_y;
-	x = 0;
-	y = 0;
-	// new_x = x;
-	// new_y = y;
+	new_x = en->x;
+	new_y = en->y;
 	if (step == 0)
 		new_x++;
 	else if (step == 3)
@@ -101,36 +89,14 @@ void	ft_enemy_movment(t_mlx *game, int y, int x)
 	// 	new_y--;
 	if (game->map[new_y][new_x] != '1')
 	{
-		ft_new_e_position_check(game, new_x, new_y);
+		ft_new_e_position_check(game, en, new_x, new_y);
 		// step++;
 		// return ;
 	}
-	else
-	{
-		step = (step + 1) % 4;
-	}
-	step = (step + 1) % 4;
-}
-
-void	ft_find_enemy(t_mlx *game)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if (game->map[y][x] == 'N')
-			{
-				game->enemy_x = x;
-				game->enemy_y = y;
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
+	// else
+	// {
+	// 	step = (step + 1) % 4;
+	// }
+	// step = (step + 1) % 4;
+	step = (step + 1) % 3;
 }
