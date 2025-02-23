@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/19 15:51:16 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/23 11:50:48 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,11 @@ int			update_enemy(t_mlx *game);
 void		ft_set_enemies_location(t_game *game);
 t_enemy		*ft_add_location(int y, int x);
 t_enemy		*ft_set_the_head();
-void		ft_lstclear(t_enemy **lst, void (*del)(void*));
+void		ft_lstclear(t_enemy **lst);
 void		ft_lstadd_back(t_enemy **lst, t_enemy *new);
+char		*ft_itoa(int n);
+int			movment_string(t_mlx *game);
+size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 
 void	ft_printf_ptr_adresses(t_mlx *game);
 

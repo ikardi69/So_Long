@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/15 20:43:52 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/23 12:59:50 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,19 @@ void	ft_open_window(t_game *game)
 	if (!game->ft_mlx->mlx_ptr)
 	{
 		ft_putstr("Error initializing MLX\n");
+		ft_finish_free(game->ft_mlx);
 		return;
 	}
-	game->ft_mlx->coin = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./images/coin.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
-	game->ft_mlx->wall = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./images/wall.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
-	game->ft_mlx->ground = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./images/ground.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
-	game->ft_mlx->exit = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./images/exit.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
-	game->ft_mlx->player = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./images/player.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
+	game->ft_mlx->coin = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./mandatory/images/coin.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
+	game->ft_mlx->wall = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./mandatory/images/wall.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
+	game->ft_mlx->ground = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./mandatory/images/ground.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
+	game->ft_mlx->exit = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./mandatory/images/exit.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
+	game->ft_mlx->player = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr, "./mandatory/images/player.xpm", &game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	if (!game->ft_mlx->coin || !game->ft_mlx->wall || !game->ft_mlx->ground || !game->ft_mlx->exit || !game->ft_mlx->player)
 	{
 		ft_putstr("Error loading images\n");
+		ft_finish_free(game->ft_mlx);
+		exit(1);
 		return;
 	}
 	ft_maplen(game->ft_mlx);
@@ -86,13 +89,15 @@ static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 	{
 		game->map[game->player_y][game->player_x] = '0';
 		game->map[new_y][new_x] = 'P';
+		ft_render_map(game);
+		if (game->player_x != new_x || game->player_y != new_y)
+		{
+			ft_putstr("Moves: ");
+			ft_putnbr(game->moves_count);
+			ft_putstr("\n");
+		}
 		game->player_y = new_y;
 		game->player_x = new_x;
-		game->moves_count++;
-		ft_putstr("Moves: ");
-		ft_putnbr(game->moves_count);
-		ft_putstr("\n");
-		ft_render_map(game);
 	}
 	return ;
 }
@@ -111,17 +116,16 @@ int handle_keypress(int keycode, t_mlx *game)
     if (keycode == 65307)
 	{
 		ft_putstr("You exited the game before finishing it (weak.)\n");
-		// ft_printf_ptr_adresses(game);
 		ft_finish_free(game);
 		return (exit(0), 1);
 	}
-	else if (keycode == 119)
+	else if (keycode == 119 && game->moves_count++)
 		new_y--;
-	else if (keycode == 115)
+	else if (keycode == 115 && game->moves_count++)
 		new_y++;
-	else if (keycode == 97)
+	else if (keycode == 97 && game->moves_count++)
 		new_x--;
-	else if (keycode == 100)
+	else if (keycode == 100 && game->moves_count++)
 		new_x++;
 	if (game->map[new_y][new_x] != '1')
 		ft_new_position(game, new_y, new_x);

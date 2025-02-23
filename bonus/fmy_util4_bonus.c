@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:28:12 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/19 15:50:48 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:41:23 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	ft_new_e_position_check(t_mlx *game, t_enemy *en, int new_x, int new_y)
 		en->y = new_y;
 	}
 	else if (game->map[new_y][new_x] == '1')
-		ft_enemy_movment(game, en);
+		return ;
+		// ft_enemy_movment(game, en);
 }
 
 void	ft_enemy_movment(t_mlx *game, t_enemy *en)
@@ -77,6 +78,14 @@ void	ft_enemy_movment(t_mlx *game, t_enemy *en)
 
 	new_x = en->x;
 	new_y = en->y;
+	// if (game->map[new_y][new_x + 1] != '1' && game->map[new_y][new_x + 1] != 'E' && game->map[new_y][new_x + 1] != 'C')
+	// 	new_x++;
+	// else if (game->map[new_y - 1][new_x] != '1' && game->map[new_y - 1][new_x] != 'E' && game->map[new_y - 1][new_x] != 'C')
+	// 	new_y--;
+	// else if (game->map[new_y + 1][new_x] != '1' && game->map[new_y + 1][new_x] != 'E' && game->map[new_y + 1][new_x] != 'C')
+	// 	new_y++;
+	// else if (game->map[new_y][new_x - 1] != '1' && game->map[new_y][new_x - 1] != 'E' && game->map[new_y][new_x - 1] != 'C')
+	// 	new_x--;
 	if (step == 0)
 		new_x++;
 	else if (step == 3)
@@ -85,18 +94,19 @@ void	ft_enemy_movment(t_mlx *game, t_enemy *en)
 		new_y++;
 	else if (step == 2)
 		new_x--;
-	// else if (step == 4)
-	// 	new_y--;
-	if (game->map[new_y][new_x] != '1')
-	{
+	else if (step == 4)
+		new_y--;
+	if (game->map[new_y][new_x] != '1' && game->map[new_y][new_x] != 'E')
 		ft_new_e_position_check(game, en, new_x, new_y);
-		// step++;
-		// return ;
-	}
 	// else
-	// {
-	// 	step = (step + 1) % 4;
-	// }
-	// step = (step + 1) % 4;
-	step = (step + 1) % 3;
+	// 	return ;
+	else
+	{
+		step = (step + 1) % 4;
+		//printf("OLD positions x: %d  y: %d", new_x, new_y);
+		//printf("new chossen step %d\n", step);
+		ft_enemy_movment(game, en);
+		//printf("new positions x: %d  y: %d", new_x, new_y);
+	}
+	step = (step + 1) % 4;
 }

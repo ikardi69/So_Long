@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/18 17:59:38 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:09:57 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ static void ft_exit_finish(t_mlx *game, int new_y, int new_x)
 		return ;
 	if (game->map[new_y][new_x] != 'E')
 		ft_putstr("You exited the game before finishing it (weak.)\n");
+	else
+		ft_putstr("Winner!!\n");
 	ft_finish_free(game);
 	exit(0);
 }
@@ -91,16 +93,20 @@ static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 		ft_looser_function(game);
 	else
 	{
-		// ft_enemy_movment(game);
 		game->map[game->player_y][game->player_x] = '0';
 		game->map[new_y][new_x] = 'P';
+		ft_render_map(game);
+		if (game->player_x != new_x || game->player_y != new_y)
+		{
+			if (movment_string(game))
+			{
+				ft_putstr("Error\n");
+				ft_finish_free(game);
+				exit(1);
+			}
+		}
 		game->player_y = new_y;
 		game->player_x = new_x;
-		//game->moves_count++;
-		ft_putstr("Moves: ");
-		ft_putnbr(game->moves_count);
-		ft_putstr("\n");
-		ft_render_map(game);
 	}
 	return ;
 }
@@ -118,10 +124,7 @@ int handle_keypress(int keycode, t_mlx *game)
         return (0);
     if (keycode == 65307)
 	{
-		ft_putstr("You exited the game before finishing it (weak.)\n");
-		// ft_printf_ptr_adresses(game);
-		ft_finish_free(game);
-		return (exit(0), 1);
+		return (ft_putstr("You exited the game before finishing it (weak.)\n"), ft_finish_free(game), exit(0), 1);
 	}
 	else if (keycode == 119 && ++game->moves_count)
 		new_y--;

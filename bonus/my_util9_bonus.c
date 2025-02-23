@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/19 15:38:53 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:20:25 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,11 @@ void	ft_finish_free(t_mlx *r)
 	while (r->ft_game->map[i])
 	{
 		free(r->ft_game->map[i]);
+		// r->ft_game->map[i] = NULL;
 		i++;
 	}
 	free(r->ft_game->map);
+	// r->ft_game->map = NULL;
 	i = 0;
 	while (r->ft_game->map_cpy[i])
 	{
@@ -89,8 +91,8 @@ void	ft_finish_free(t_mlx *r)
 		i++;
 	}
 	free(r->ft_game->map_cpy);
+	ft_lstclear(&(r->ft_game->enemies_location));
 	ft_mlx_free(r);
-	ft_lstclear(&(r->ft_game->enemies_location), free);
 	free(r->ft_game);
 	free(r);
 }
