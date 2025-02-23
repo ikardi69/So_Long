@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 16:24:24 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/23 12:06:03 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/23 16:02:05 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ int update_enemy(t_mlx *game)
 {
 	static int  frames = 0;
 	t_enemy	*tmp;
-	int		flag;
 
 	tmp = game->ft_game->enemies_location;
 	tmp = tmp->next;
 	frames++;
-	flag = 1;
 	if (frames % 9009 == 0)
 	{
 		while (tmp)
@@ -52,10 +50,8 @@ void	ft_set_enemies_location(t_game *game)
 	t_enemy	*n_e;
 	int		y;
 	int		x;
-	int		flag;
 
-	y = 0;
-	flag = 1;
+	y = 0;;
 	while (game->map[y])
 	{
 		x = 0;

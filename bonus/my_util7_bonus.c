@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 20:25:05 by ikardi            #+#    #+#             */
-/*   Updated: 2025/02/18 15:22:12 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/23 16:45:00 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**ft_map_cpy(char **map)
 	{
 		map_cp[y] = ft_strdup(map[y]);
 		if (!map_cp[y])
-			return (ft_fail_free(map_cp), NULL);
+			return (free_a_map(map_cp, y), NULL);
 	}
 	return (map_cp);
 }

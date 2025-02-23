@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/23 11:50:48 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/23 16:42:01 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void		ft_maplen(t_mlx *f_map);
 void		ft_open_window(t_game *game);
 int			handle_keypress(int keycode, t_mlx *game);
 void		ft_render_map(t_mlx	*mlx);
-// void		ft_mlx_find_player(t_mlx *p);
 void		ft_putnbr(int n);
 void		ft_putstr(char *s);
 void		ft_putchar(char c);
@@ -117,6 +116,7 @@ void		ft_lstadd_back(t_enemy **lst, t_enemy *new);
 char		*ft_itoa(int n);
 int			movment_string(t_mlx *game);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
+void		free_a_map(char **map, int size);
 
 void	ft_printf_ptr_adresses(t_mlx *game);
 

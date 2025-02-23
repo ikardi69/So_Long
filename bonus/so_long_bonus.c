@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/19 15:50:58 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/23 16:51:19 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,13 @@ t_game	*ft_struct(int fd)
 	r->enemy = 0;
 	r->map = ft_get_map(fd);
 	if (!r->map)
-		return (free(r), NULL);
+		return (free(r->ft_mlx), free(r), NULL);
 	r->map_cpy = ft_map_cpy(r->map);
 	if (!r->map_cpy)
-		return (free(r), NULL);
+		return (free_a_map(r->map, 0), free(r->ft_mlx), free(r), NULL);
 	r->enemies_location = ft_set_the_head();
 	if (!r->enemies_location)
-		return (NULL);
+		return (free_a_map(r->map_cpy, 0), free_a_map(r->map, 0), free(r->ft_mlx), free(r), NULL);
 	r->ft_mlx = ft_mlx_struct(r);
 	return (r);
 }

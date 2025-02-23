@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 16:19:18 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/23 12:10:57 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/23 16:46:21 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,11 @@ char	*ft_itoa(int n)
 	int		sign;
 
 	nbr = n;
+	size = 0;
+    sign = 1;
 	r = NULL;
-    size = 1;
 	if (nbr == 0)
-	{
-		r = ft_zero(r);
-		return (r);
-	}
+		return (r = ft_zero(r));
 	if (n < 0)
 	{
 		sign = -1;
@@ -120,4 +118,27 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	}
 	dst[i] = '\0';
 	return (srcsize);
+}
+
+void	free_a_map(char **map, int size)
+{
+	int	i;
+
+	i = 0;
+	if (size == 0)
+	{
+		while (map[i])
+		{
+			free(map[i]);
+			i++;
+		}
+		free(map);
+		return ;
+	}
+	while (i < size)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }

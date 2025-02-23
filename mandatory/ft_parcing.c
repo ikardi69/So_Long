@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/23 12:04:15 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/23 15:51:15 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**ft_get_map(int fd)
 	char	**result;
 
 	map = get_next_line(fd);
-	if (!map)														// Handling empty file
+	if (!map)
 		return (close(fd), ft_putstr("Error\nEmpty file\n"), NULL);
 	while ((buffer = get_next_line(fd)) != NULL)
 	{
