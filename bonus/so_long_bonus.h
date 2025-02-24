@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/23 16:42:01 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:44:34 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_game
 {
 	int				x;
 	int				y;
+	int				fd;
 	int				coins;
 	int				exit;
 	int				player;

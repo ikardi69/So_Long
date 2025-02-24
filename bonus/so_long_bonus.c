@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/23 16:51:19 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:47:07 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**ft_get_map(int fd)
 	char	**result;
 
 	map = get_next_line(fd);
-	if (!map)														// Handling empty file
+	if (!map)
 		return (close(fd), ft_putstr("Error\nEmpty file\n"), NULL);
 	while ((buffer = get_next_line(fd)) != NULL)
 	{
@@ -127,9 +127,8 @@ int main(int argc, char **argv)
 	p = ft_struct(fd);
 	if (!p)
 		return (1);
+	p->fd = fd;
 	ft_find_player(p);
-	// ft_print_map(p->map);
-	// printf("\n");
 	if (collectibles_check(p))
 		return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
 	ft_flood_fill(p->map_cpy, p->y, p->x);

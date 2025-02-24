@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 16:19:18 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/23 16:46:21 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:50:05 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	movment_string(t_mlx *game)
 	str = (char *)malloc((ft_strlen("Moves: ") + 1));
 	if (!str)
 		return (1);
-	ft_strlcpy(str, "Moves: ", ft_strlen("Moves: ") + 1);
+	ft_strlcpy(str, "Moves: ", (ft_strlen("Moves: ") + 1));
 	nb = ft_itoa(game->moves_count);
 	if (!nb)
 		return (free(str), 1);
