@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/24 11:47:07 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:33:16 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char	**ft_get_map(int fd)
 	while ((buffer = get_next_line(fd)) != NULL)
 	{
 		map = ft_strjoin(map, buffer);
+		if (buffer[0] == '\n')
+			exit(1);
 		free(buffer);
 	}
 	result = ft_split(map, '\n');
@@ -131,8 +133,8 @@ int main(int argc, char **argv)
 	ft_find_player(p);
 	if (collectibles_check(p))
 		return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
+	ft_print_map(p->map_cpy);
 	ft_flood_fill(p->map_cpy, p->y, p->x);
-	// ft_print_map(p->map_cpy);
 	if (ft_map_check(p->map_cpy))
 		return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
 	// else
