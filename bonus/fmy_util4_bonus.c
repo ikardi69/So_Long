@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:28:12 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/24 11:47:14 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:56:14 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	ft_new_e_position_check(t_mlx *game, t_enemy *en, int new_x, int new_y)
 	}
 	else if (game->map[new_y][new_x] == '1')
 		return ;
-		// ft_enemy_movment(game, en);
 }
 
 void	ft_enemy_movment(t_mlx *game, t_enemy *en)
