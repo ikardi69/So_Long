@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 12:20:16 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:17:34 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ char		**ft_split(char const *s, char c);
 int     	ft_strncmp(const char *s1, const char *s2, size_t n);
 int     	len_check(char *const *map);
 char    	**ft_fail_free(char **s);
-void		ft_print_map(char **map);
 char		**ft_map_cpy(char **map);
 void		ft_find_player(t_game *p);
 void		ft_flood_fill(char **map, int y, int x);
@@ -104,14 +103,14 @@ void		ft_render_map(t_mlx	*mlx);
 void		ft_putnbr(int n);
 void		ft_putstr(char *s);
 void		ft_putchar(char c);
-int			ft_coins_E_check(t_mlx *game);
+int			ft_coins_e_check(t_mlx *game);
 void		ft_enemy_movment(t_mlx *game, t_enemy *en);
 void		ft_new_e_position_check(t_mlx *game, t_enemy *en, int new_x, int new_y);
 void		ft_looser_function(t_mlx *game);
 int			update_enemy(t_mlx *game);
 void		ft_set_enemies_location(t_game *game);
 t_enemy		*ft_add_location(int y, int x);
-t_enemy		*ft_set_the_head();
+t_enemy		*ft_set_the_head(void);
 void		ft_lstclear(t_enemy **lst);
 void		ft_lstadd_back(t_enemy **lst, t_enemy *new);
 char		*ft_itoa(int n);
@@ -124,5 +123,7 @@ void		ft_set_variables(t_game *game);
 void		map_validation(t_game *game, char *file);
 int			ft_extention_check(char *file);
 void		ft_failing(t_game *game, int sign);
+void		set_img_ptr(t_mlx *mlx, char c, void **img);
+void	ft_set_images(t_game *game);
 
 #endif

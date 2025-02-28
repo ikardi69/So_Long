@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:13:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 12:23:33 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:21:00 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	map_validation(t_game *game, char *file)
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}
-		
 	ft_find_player(game);
 	ft_flood_fill(game->map_cpy, game->y, game->x);
 	if (ft_map_check(game->map_cpy))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fmy_util4_bonus.c                                  :+:      :+:    :+:   */
+/*   my_util4_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:28:12 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/24 11:47:14 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:12:22 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_mlx	*ft_mlx_struct(t_game *r)
 	return (r->ft_mlx);
 }
 
-int	ft_coins_E_check(t_mlx *game)
+int	ft_coins_e_check(t_mlx *game)
 {
 	int	x;
 	int	y;
@@ -67,43 +67,33 @@ void	ft_new_e_position_check(t_mlx *game, t_enemy *en, int new_x, int new_y)
 	}
 	else if (game->map[new_y][new_x] == '1')
 		return ;
-		// ft_enemy_movment(game, en);
 }
 
 void	ft_enemy_movment(t_mlx *game, t_enemy *en)
 {
 	int			new_x;
 	int			new_y;
-	static int	step = 0;
 
 	new_x = en->x;
 	new_y = en->y;
-	// if (game->map[new_y][new_x + 1] != '1' && game->map[new_y][new_x + 1] != 'E' && game->map[new_y][new_x + 1] != 'C')
-	// 	new_x++;
-	// else if (game->map[new_y - 1][new_x] != '1' && game->map[new_y - 1][new_x] != 'E' && game->map[new_y - 1][new_x] != 'C')
-	// 	new_y--;
-	// else if (game->map[new_y + 1][new_x] != '1' && game->map[new_y + 1][new_x] != 'E' && game->map[new_y + 1][new_x] != 'C')
-	// 	new_y++;
-	// else if (game->map[new_y][new_x - 1] != '1' && game->map[new_y][new_x - 1] != 'E' && game->map[new_y][new_x - 1] != 'C')
-	// 	new_x--;
-	if (step == 0)
+	if (game->map[new_y][new_x + 1] != '1' && game->map[new_y][new_x + 1] != 'E'
+		&& game->map[new_y][new_x + 1] != 'C')
 		new_x++;
-	else if (step == 3)
+	else if (game->map[new_y - 1][new_x] != '1'
+		&& game->map[new_y - 1][new_x] != 'E'
+		&& game->map[new_y - 1][new_x] != 'C')
 		new_y--;
-	else if (step == 1)
+	else if (game->map[new_y + 1][new_x] != '1'
+		&& game->map[new_y + 1][new_x] != 'E'
+		&& game->map[new_y + 1][new_x] != 'C')
 		new_y++;
-	else if (step == 2)
+	else if (game->map[new_y][new_x - 1] != '1'
+		&& game->map[new_y][new_x - 1] != 'E'
+		&& game->map[new_y][new_x - 1] != 'C')
 		new_x--;
-	else if (step == 4)
-		new_y--;
-	if (game->map[new_y][new_x] != '1' && game->map[new_y][new_x] != 'E')
+	if (game->map[new_y][new_x] != '1' && game->map[new_y][new_x] != 'E'
+		&& game->map[new_y][new_x - 1] != 'C')
 		ft_new_e_position_check(game, en, new_x, new_y);
-	// else
-	// 	return ;
 	else
-	{
-		step = (step + 1) % 4;
-		ft_enemy_movment(game, en);
-	}
-	step = (step + 1) % 4;
+		return ;
 }

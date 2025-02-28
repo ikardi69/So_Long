@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 16:19:18 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/24 11:50:05 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:20:40 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_itoa(int n)
 
 	nbr = n;
 	size = 0;
-    sign = 1;
+	sign = 1;
 	r = NULL;
 	if (nbr == 0)
 		return (r = ft_zero(r));
@@ -98,47 +98,7 @@ int	movment_string(t_mlx *game)
 	mlx_string_put(game->mlx_ptr, game->win_ptr, 47, 35, 0xFFFFFF, join);
 	mlx_string_put(game->mlx_ptr, game->win_ptr, (47 + 1), 35, 0xFFFFFF, join);
 	mlx_string_put(game->mlx_ptr, game->win_ptr, 47, (35 + 1), 0xFFFFFF, join);
-	mlx_string_put(game->mlx_ptr, game->win_ptr, (47 + 1), (35 + 1), 0xFFFFFF, join);
+	mlx_string_put(game->mlx_ptr, game->win_ptr,
+		(47 + 1), (35 + 1), 0xFFFFFF, join);
 	return (free(nb), free(join), 0);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-	size_t	srcsize;
-
-	if (!size)
-		return (ft_strlen(src));
-	srcsize = ft_strlen(src);
-	i = 0;
-	while (i < (size -1) && src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (srcsize);
-}
-
-void	free_a_map(char **map, int size)
-{
-	int	i;
-
-	i = 0;
-	if (size == 0)
-	{
-		while (map[i])
-		{
-			free(map[i]);
-			i++;
-		}
-		free(map);
-		return ;
-	}
-	while (i < size)
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
 }

@@ -6,13 +6,13 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:14:25 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/26 12:59:08 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:14:38 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-char    **ft_fail_free(char **s)
+char	**ft_fail_free(char **s)
 {
 	size_t	i;
 

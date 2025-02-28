@@ -6,19 +6,11 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 12:30:59 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:58:50 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-int	destroy_window(t_mlx *game)
-{
-	ft_putstr("You exited the game before finishing it (weak.)\n");
-	ft_finish_free(game);
-	exit (1);
-	return (0);
-}
 
 void	ft_open_window(t_game *game)
 {
@@ -55,24 +47,14 @@ void	ft_render_map(t_mlx	*mlx)
 		x = -1;
 		while (mlx->map[y][++x])
 		{
-			if (mlx->map[y][x] == '1')
-				img = mlx->wall;
-			else if (mlx->map[y][x] == '0')
-				img = mlx->ground;
-			else if (mlx->map[y][x] == 'C')
-				img = mlx->coin;
-			else if (mlx->map[y][x] == 'E')
-				img = mlx->exit;
-			else if (mlx->map[y][x] == 'P')
-				img = mlx->player;
-			else if (mlx->map[y][x] == 'N')
-				img = mlx->enemy;
-			mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img, x * TILE_SIZE, y * TILE_SIZE);
+			set_img_ptr(mlx, mlx->map[y][x], &img);
+			mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img,
+				x * TILE_SIZE, y * TILE_SIZE);
 		}
 	}
 }
 
-static void ft_exit_finish(t_mlx *game, int new_y, int new_x)
+static void	ft_exit_finish(t_mlx *game, int new_y, int new_x)
 {
 	if (ft_coins_e_check(game))
 		return ;
@@ -110,18 +92,18 @@ static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 	return ;
 }
 
-int handle_keypress(int keycode, t_mlx *game)
+int	handle_keypress(int keycode, t_mlx *game)
 {
 	int	new_x;
 	int	new_y;
 
 	new_x = game->player_x;
 	new_y = game->player_y;
-    if (new_x < 0 || new_y < 0 || 
-        new_y >= game->map_height || 
-        new_x >= game->map_width)
-        return (0);
-    if (keycode == 65307)
+	if (new_x < 0 || new_y < 0
+		|| new_y >= game->map_height
+		|| new_x >= game->map_width)
+		return (0);
+	if (keycode == 65307)
 	{
 		ft_putstr("You exited the game before finishing it (weak.)\n");
 		return (ft_finish_free(game), exit(0), 1);
@@ -136,5 +118,5 @@ int handle_keypress(int keycode, t_mlx *game)
 		new_x++;
 	if (game->map[new_y][new_x] != '1')
 		ft_new_position(game, new_y, new_x);
-    return (0);
+	return (0);
 }

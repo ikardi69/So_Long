@@ -6,16 +6,16 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 16:24:24 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/23 16:02:05 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:18:13 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-int update_enemy(t_mlx *game)
+int	update_enemy(t_mlx *game)
 {
-	static int  frames = 0;
-	t_enemy	*tmp;
+	static int	frames = 0;
+	t_enemy		*tmp;
 
 	tmp = game->ft_game->enemies_location;
 	tmp = tmp->next;
@@ -51,7 +51,7 @@ void	ft_set_enemies_location(t_game *game)
 	int		y;
 	int		x;
 
-	y = 0;;
+	y = 0;
 	while (game->map[y])
 	{
 		x = 0;
@@ -85,7 +85,7 @@ void	ft_lstadd_back(t_enemy **lst, t_enemy *new)
 	tmp->next = new;
 }
 
-t_enemy		*ft_set_the_head()
+t_enemy	*ft_set_the_head(void)
 {
 	t_enemy	*head;
 
@@ -96,19 +96,4 @@ t_enemy		*ft_set_the_head()
 	head->x = 0;
 	head->next = NULL;
 	return (head);
-}
-
-void	ft_lstclear(t_enemy **lst)
-{
-	t_enemy	*temp;
-
-	if (!lst)
-		return ;
-	while (*lst)
-	{
-		temp = (*lst)->next;
-		free(*lst);
-		*lst = temp;
-	}
-	*lst = NULL;
 }
