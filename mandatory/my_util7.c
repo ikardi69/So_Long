@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parcing_utils.c                                    :+:      :+:    :+:   */
+/*   my_util7.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 20:25:05 by ikardi            #+#    #+#             */
-/*   Updated: 2025/02/06 20:30:34 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:16:58 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-
-int ft_extention_check(char *file)
+int	ft_extention_check(char *file)
 {
-	int i;
+	int	i;
 
 	i = 0;
+	if (file[i] == '.' && file[i + 1] == '/')
+		i++;
 	while (file[i] && file[i] != '.')
 		i++;
 	if (!file[i])
 		return (1);
-	if (ft_strncmp(file + i, ".ber", ft_strlen(file + i) != 0))
+	if (ft_strncmp(file + i, ".ber", ft_strlen(file + i)))
 		return (1);
 	return (0);
 }
@@ -36,19 +37,13 @@ int	ft_rowslen(char **map)
 		y++;
 	return (y);
 }
-void	ft_print_map(char **map2)
-{
-
-	int i = -1;
-	while (map2[++i] != NULL)
-		printf("%s\n", map2[i]);
-}
 
 void	ft_flood_fill(char **map, int y, int x)
 {
 	if (y < 0 || x < 0 || !map[y] || !map[y][x])
 		return ;
-	if (map[y][x] == '0' || map[y][x] == 'P' || map[y][x] == 'E' || map[y][x] == 'C')
+	if (map[y][x] == '0' || map[y][x] == 'P'
+		|| map[y][x] == 'E' || map[y][x] == 'C')
 	{
 		if (map[y][x] == 'E')
 		{
@@ -65,7 +60,7 @@ void	ft_flood_fill(char **map, int y, int x)
 	ft_flood_fill(map, y - 1, x);
 }
 
-char **ft_map_alloc(char **map)
+char	**ft_map_alloc(char **map)
 {
 	int		i;
 	char	**map_cp;

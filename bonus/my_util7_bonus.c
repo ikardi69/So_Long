@@ -6,23 +6,25 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 20:25:05 by ikardi            #+#    #+#             */
-/*   Updated: 2025/02/23 16:45:00 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:29:13 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
 
-int ft_extention_check(char *file)
+int	ft_extention_check(char *file)
 {
 	int i;
 
 	i = 0;
+	if (file[i] == '.' && file[i + 1] == '/')
+		i++;
 	while (file[i] && file[i] != '.')
 		i++;
 	if (!file[i])
 		return (1);
-	if (ft_strncmp(file + i, ".ber", ft_strlen(file + i) != 0))
+	if (ft_strncmp(file + i, ".ber", ft_strlen(file + i)))
 		return (1);
 	return (0);
 }

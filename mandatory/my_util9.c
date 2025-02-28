@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parcing_utils2.c                                   :+:      :+:    :+:   */
+/*   my_util9.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/23 12:08:10 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:17:36 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	col_check_helper(t_game *p)
 
 int	collectibles_check(t_game *rs)
 {
-	int j;
-	int i;
+	int	j;
+	int	i;
 
 	j = -1;
 	rs->coins = 0;

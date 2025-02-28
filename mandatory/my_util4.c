@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_util.c                                          :+:      :+:    :+:   */
+/*   my_util4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:28:12 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/15 20:45:03 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:13:22 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ t_mlx	*ft_mlx_struct(t_game *r)
 	ft_find_player(r);
 	r->ft_mlx->coin_count = 0;
 	r->ft_mlx->moves_count = 0;
-	r->ft_mlx->player_x = 0;  // Initialize to 0 temporarily
+	r->ft_mlx->player_x = 0;
 	r->ft_mlx->player_y = 0;
 	r->ft_mlx->map_height = ft_rows_len_check(r->ft_mlx->map);
 	r->ft_mlx->map_width = ft_strlen(r->ft_mlx->map[0]);
 	r->ft_mlx->win_ptr = NULL;
-	r->ft_mlx->mlx_ptr = NULL; 		//mlx_init();
-	r->ft_mlx->coin = NULL;			//mlx_xpm_file_to_image(m->mlx_ptr, "../images/coin.xpm", &m->map_width, &m->map_height);
-	r->ft_mlx->wall = NULL;			//mlx_xpm_file_to_image(m->mlx_ptr, "../images/wall.xpm", &m->map_width, &m->map_height);
-	r->ft_mlx->ground = NULL;		//mlx_xpm_file_to_image(m->mlx_ptr, "../images/ground.xpm", &m->map_width, &m->map_height);
-	r->ft_mlx->exit = NULL;			//mlx_xpm_file_to_image(m->mlx_ptr, "../images/exit.xpm", &m->map_width, &m->map_height);
-	r->ft_mlx->player = NULL;		//mlx_xpm_file_to_image(m->mlx_ptr, "../images/player.xpm", &m->map_width, &m->map_height);
+	r->ft_mlx->mlx_ptr = NULL;
+	r->ft_mlx->coin = NULL;
+	r->ft_mlx->wall = NULL;
+	r->ft_mlx->ground = NULL;
+	r->ft_mlx->exit = NULL;
+	r->ft_mlx->player = NULL;
 	r->ft_mlx->ft_game = r;
 	return (r->ft_mlx);
 }
 
-int	ft_coins_E_check(t_mlx *game)
+int	ft_coins_e_check(t_mlx *game)
 {
 	int	x;
 	int	y;
@@ -51,4 +51,39 @@ int	ft_coins_E_check(t_mlx *game)
 		y++;
 	}
 	return (0);
+}
+
+void	map_validation(t_game *game, char *file)
+{
+	if (ft_extention_check(file))
+	{
+		ft_putstr("Error: Invalid file extension. File must end with '.ber'\n");
+		ft_finish_free(game->ft_mlx);
+		exit(1);
+	}
+	if (collectibles_check(game))
+	{
+		ft_putstr("Not a valid map\n");
+		ft_finish_free(game->ft_mlx);
+		exit(1);
+	}
+	ft_find_player(game);
+	ft_flood_fill(game->map_cpy, game->y, game->x);
+	if (ft_map_check(game->map_cpy))
+	{
+		ft_putstr("Not a valid map\n");
+		ft_finish_free(game->ft_mlx);
+		exit(1);
+	}
+	ft_find_player(game);
+}
+
+void	get_map_failure(int fd, char *map, char *buffer, int sign)
+{
+	ft_putstr("Error\nEmpty file\nOr Empty line\n");
+	if (!sign)
+		free(buffer);
+	close(fd);
+	free(map);
+	exit(1);
 }

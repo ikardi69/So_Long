@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/14 16:26:00 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:15:38 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_game
 	int		coins;
 	int		exit;
 	int		player;
+	int		fd;
 	char	**map;
 	char	**map_cpy;
 	struct s_mlx	*ft_mlx;
@@ -76,7 +77,6 @@ char		**ft_split(char const *s, char c);
 int     	ft_strncmp(const char *s1, const char *s2, size_t n);
 int     	len_check(char *const *map);
 char    	**ft_fail_free(char **s);
-void		ft_print_map(char **map);
 char		**ft_map_cpy(char **map);
 void		ft_find_player(t_game *p);
 void		ft_flood_fill(char **map, int y, int x);
@@ -94,8 +94,11 @@ void		ft_render_map(t_mlx	*mlx);
 void		ft_putnbr(int n);
 void		ft_putstr(char *s);
 void		ft_putchar(char c);
-int			ft_coins_E_check(t_mlx *game);
-
-void	ft_printf_ptr_adresses(t_mlx *game);
+int			ft_coins_e_check(t_mlx *game);
+void		map_validation(t_game *game, char *file);
+void		get_map_failure(int fd, char *map, char *buffer, int sign);
+int			ft_extention_check(char *file);
+void		ft_failing(t_game *game, int sign);
+void		ft_set_images(t_game *game);
 
 #endif

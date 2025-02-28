@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/24 11:44:34 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:20:16 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,11 @@ char		*ft_itoa(int n);
 int			movment_string(t_mlx *game);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 void		free_a_map(char **map, int size);
-
-void	ft_printf_ptr_adresses(t_mlx *game);
+void		get_map_failure(int fd, char *map, char *buffer, int sign);
+int			destroy_window(t_mlx *game);
+void		ft_set_variables(t_game *game);
+void		map_validation(t_game *game, char *file);
+int			ft_extention_check(char *file);
+void		ft_failing(t_game *game, int sign);
 
 #endif

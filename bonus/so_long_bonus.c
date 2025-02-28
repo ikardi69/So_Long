@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/25 19:33:16 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:45:13 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ char	**ft_get_map(int fd)
 	char	**result;
 
 	map = get_next_line(fd);
-	if (!map)
-		return (close(fd), ft_putstr("Error\nEmpty file\n"), NULL);
-	while ((buffer = get_next_line(fd)) != NULL)
+	if (!map || map[0] == '\n')
+		return (get_map_failure(fd, map, buffer = NULL, 1), NULL);
+	while ((buffer = get_next_line(fd)))
 	{
 		map = ft_strjoin(map, buffer);
 		if (buffer[0] == '\n')
-			exit(1);
+			return (get_map_failure(fd, map, buffer, 0), NULL);
 		free(buffer);
 	}
 	result = ft_split(map, '\n');
 	if (!result)
-		return (NULL);
+		return (free(map), NULL);
 	return (free(map), result);
 }
 
@@ -83,12 +83,8 @@ t_game	*ft_struct(int fd)
 	r->ft_mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	if (!r->ft_mlx)
 		return (free(r), NULL);
-	r->coins = 0;
-	r->exit = 0;
-	r->x = 0;
-	r->y = 0;
-	r->player = 0;
-	r->enemy = 0;
+	r->fd = fd;
+	ft_set_variables(r);
 	r->map = ft_get_map(fd);
 	if (!r->map)
 		return (free(r->ft_mlx), free(r), NULL);
@@ -102,20 +98,6 @@ t_game	*ft_struct(int fd)
 	return (r);
 }
 
-void	ft_printf_ptr_adresses(t_mlx *game)
-{
-	printf("mlx adress : %p\n", game);
-	printf("coins adress : %p\n", game->coin);
-	printf("wall adress : %p\n", game->wall);
-	printf("ground adress : %p\n", game->ground);
-	printf("exit adress : %p\n", game->exit);
-	printf("player adress : %p\n", game->player);
-	printf("map adress : %p\n", game->ft_game->map);
-	printf("map_cpy adress : %p\n", game->ft_game->map_cpy);
-	printf("game adress : %p\n", game->ft_game);
-	printf("mlx_ptr adress : %p\n", game->mlx_ptr);
-	printf("mlx_win_ptr adress : %p\n", game->win_ptr);
-}
 
 int main(int argc, char **argv)
 {
@@ -128,20 +110,9 @@ int main(int argc, char **argv)
 		return (ft_putstr("Error\nUnable to open file"), 1);
 	p = ft_struct(fd);
 	if (!p)
-		return (1);
-	p->fd = fd;
-	ft_find_player(p);
-	if (collectibles_check(p))
-		return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
-	ft_print_map(p->map_cpy);
-	ft_flood_fill(p->map_cpy, p->y, p->x);
-	if (ft_map_check(p->map_cpy))
-		return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
-	// else
-	// 	printf("vaalid\n");
-	ft_find_player(p);
+		return (close(fd), 1);
+	map_validation(p, argv[1]);
 	ft_set_enemies_location(p);
 	ft_open_window(p);
-	//mlx_key_hook
-	return (close(fd), ft_finish_free(p->ft_mlx), 0);
+	return (ft_finish_free(p->ft_mlx), 0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parcing.c                                       :+:      :+:    :+:   */
+/*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/23 15:51:15 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:35:33 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,18 @@ char	**ft_get_map(int fd)
 	char	**result;
 
 	map = get_next_line(fd);
-	if (!map)
-		return (close(fd), ft_putstr("Error\nEmpty file\n"), NULL);
+	if (!map || map[0] == '\n')
+		return (get_map_failure(fd, map, buffer = NULL, 1), NULL);
 	while ((buffer = get_next_line(fd)) != NULL)
 	{
 		map = ft_strjoin(map, buffer);
+		if (buffer[0] == '\n')
+			return (get_map_failure(fd, map, buffer, 0), NULL);
 		free(buffer);
 	}
 	result = ft_split(map, '\n');
 	if (!result)
-		return (NULL);
+		return (free(map), NULL);
 	return (free(map), result);
 }
 
@@ -77,7 +79,7 @@ t_game	*ft_struct(int fd)
 
 	r = (t_game *)malloc(sizeof(t_game));
 	if (!r)
-		return (NULL);
+		return (ft_putstr("Allocation failed\n"), NULL);
 	r->ft_mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	if (!r->ft_mlx)
 		return (free(r), NULL);
@@ -86,29 +88,15 @@ t_game	*ft_struct(int fd)
 	r->x = 0;
 	r->y = 0;
 	r->player = 0;
+	r->fd = fd;
 	r->map = ft_get_map(fd);
 	if (!r->map)
-		return (free(r), NULL);
+		return (free(r->ft_mlx), free(r), NULL);
 	r->map_cpy = ft_map_cpy(r->map);
 	if (!r->map_cpy)
-		return (free(r), NULL);
+		return (free(r->ft_mlx), free(r), NULL);
 	r->ft_mlx = ft_mlx_struct(r);
 	return (r);
-}
-
-void	ft_printf_ptr_adresses(t_mlx *game)
-{
-	printf("mlx adress : %p\n", game);
-	printf("coins adress : %p\n", game->coin);
-	printf("wall adress : %p\n", game->wall);
-	printf("ground adress : %p\n", game->ground);
-	printf("exit adress : %p\n", game->exit);
-	printf("player adress : %p\n", game->player);
-	printf("map adress : %p\n", game->ft_game->map);
-	printf("map_cpy adress : %p\n", game->ft_game->map_cpy);
-	printf("game adress : %p\n", game->ft_game);
-	printf("mlx_ptr adress : %p\n", game->mlx_ptr);
-	printf("mlx_win_ptr adress : %p\n", game->win_ptr);
 }
 
 int main(int argc, char **argv)
@@ -123,13 +111,14 @@ int main(int argc, char **argv)
 	p = ft_struct(fd);
 	if (!p)
 		return (1);
-	ft_find_player(p);
-	if (collectibles_check(p))
-		return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
-	ft_flood_fill(p->map_cpy, p->y, p->x);
-	if (ft_map_check(p->map_cpy))
-		return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
-	ft_find_player(p);
+	// ft_find_player(p);
+	// if (collectibles_check(p))
+	// 	return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
+	// ft_flood_fill(p->map_cpy, p->y, p->x);
+	// if (ft_map_check(p->map_cpy))
+	// 	return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
+	// ft_find_player(p);
+	map_validation(p, argv[1]);
 	ft_open_window(p);
 	return (close(fd), ft_finish_free(p->ft_mlx), 0);
 }
