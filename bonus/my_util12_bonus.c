@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:13:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 13:21:00 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/02 12:34:06 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,21 @@ void	ft_failing(t_game *game, int sign)
 void	ft_set_images(t_game *game)
 {
 	game->ft_mlx->coin = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./bonus/images/coin.xpm",
+			"./images/coin.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->wall = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./bonus/images/wall.xpm",
+			"./images/wall.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->ground = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./bonus/images/ground.xpm",
+			"./images/ground.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->exit = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./bonus/images/exit.xpm",
+			"./images/exit.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->player = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./bonus/images/player.xpm",
+			"./images/player.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->enemy = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./bonus/images/enemy.xpm",
+			"./images/enemy.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 }

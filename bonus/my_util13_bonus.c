@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:31:22 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 13:20:36 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:19:46 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	set_img_ptr(t_mlx *mlx, char c, void **img)
 		*img = mlx->ground;
 	else if (c == 'C')
 		*img = mlx->coin;
-	else if (c == 'E')
+	else if (c == 'E' && mlx->ft_game->coins != 0)
+		*img = mlx->ground;
+	else if (c == 'E' && mlx->ft_game->coins == 0)
 		*img = mlx->exit;
 	else if (c == 'P')
 		*img = mlx->player;

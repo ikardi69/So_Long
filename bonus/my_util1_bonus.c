@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 12:58:50 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:19:10 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,10 @@ void	ft_render_map(t_mlx	*mlx)
 	}
 }
 
-static void	ft_exit_finish(t_mlx *game, int new_y, int new_x)
+static void	ft_exit_finish(t_mlx *game)
 {
 	if (ft_coins_e_check(game))
 		return ;
-	if (game->map[new_y][new_x] != 'E')
-		ft_putstr("You exited the game before finishing it (weak.)\n");
 	else
 		ft_putstr("Winner!!\n");
 	ft_finish_free(game);
@@ -69,11 +67,13 @@ static void	ft_exit_finish(t_mlx *game, int new_y, int new_x)
 static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 {
 	if (game->map[new_y][new_x] == 'E')
-		ft_exit_finish(game, new_y, new_x);
+		ft_exit_finish(game);
 	else if (game->map[new_y][new_x] == 'N')
 		ft_looser_function(game);
 	else
 	{
+		if (game->map[new_y][new_x] == 'C')
+		game->ft_game->coins--;
 		game->map[game->player_y][game->player_x] = '0';
 		game->map[new_y][new_x] = 'P';
 		ft_render_map(game);
