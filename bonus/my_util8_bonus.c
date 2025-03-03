@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:14:25 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 13:14:38 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:22:37 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_first_last_check(char **map)
 	x = 0;
 	while (map[y][x])
 	{
-		if (map[y][x] != '1')
+		if (map[y][x] != '1' && map[y][x] != '\n' && map[y][x] != '\r')
 			return (1);
 		x++;
 	}
@@ -45,7 +45,7 @@ static int	ft_first_last_check(char **map)
 	x = 0;
 	while (map[y][x])
 	{
-		if (map[y][x] != '1')
+		if (map[y][x] != '1' && map[y][x] != '\n' && map[y][x] != '\r')
 			return (1);
 		x++;
 	}
@@ -63,9 +63,11 @@ static int	ft_rows_check(char **map)
 		return (1);
 	while (map[y])
 	{
-		if (map[y][0] != '1')
+		if (map[y][0] != '1' && map[y][x] != '\n' && map[y][x] != '\r')
 			return (1);
-		else if (map[y][ft_strlen(map[y]) - 1] != '1')
+		else if (map[y][ft_strlen(map[y]) - 1] != '1'
+			&& map[y][ft_strlen(map[y]) - 1] != '\n'
+			&& map[y][ft_strlen(map[y]) - 1] != '\r')
 			return (1);
 		y++;
 	}
@@ -100,10 +102,10 @@ int	ft_rows_len_check(char **map)
 	int	len;
 
 	y = 0;
-	len = ft_strlen(map[y]);
+	len = ft_strlen_edited(map[y]);
 	while (map[y])
 	{
-		if (ft_strlen(map[y]) != len)
+		if (ft_strlen_edited(map[y]) != len)
 			return (1);
 		y++;
 	}

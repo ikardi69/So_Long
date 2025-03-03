@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/02 11:19:10 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:20:01 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 	else
 	{
 		if (game->map[new_y][new_x] == 'C')
-		game->ft_game->coins--;
+			game->ft_game->coins--;
 		game->map[game->player_y][game->player_x] = '0';
 		game->map[new_y][new_x] = 'P';
 		ft_render_map(game);

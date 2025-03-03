@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:28:12 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 13:12:22 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:28:12 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,24 @@ void	ft_enemy_movment(t_mlx *game, t_enemy *en)
 		ft_new_e_position_check(game, en, new_x, new_y);
 	else
 		return ;
+}
+
+int	ft_strlen_edited(char *s)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (s[i])
+	{
+		if (s[i] == '\n' || s[i] == '\r')
+			i++;
+		else
+		{
+			len++;
+			i++;
+		}
+	}
+	return (len);
 }

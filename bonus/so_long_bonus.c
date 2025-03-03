@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/26 14:45:13 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:21:46 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,20 @@ char	**ft_get_map(int fd)
 	char	*buffer;
 	char	**result;
 
+	buffer = NULL;
 	map = get_next_line(fd);
 	if (!map || map[0] == '\n')
 		return (get_map_failure(fd, map, buffer = NULL, 1), NULL);
-	while ((buffer = get_next_line(fd)))
+	buffer = get_next_line(fd);
+	if (!buffer || buffer[0] == '\n')
+		return (get_map_failure(fd, map, buffer = NULL, 1), NULL);
+	while (buffer)
 	{
 		map = ft_strjoin(map, buffer);
 		if (buffer[0] == '\n')
 			return (get_map_failure(fd, map, buffer, 0), NULL);
 		free(buffer);
+		buffer = get_next_line(fd);
 	}
 	result = ft_split(map, '\n');
 	if (!result)
@@ -50,8 +55,8 @@ char	**ft_get_map(int fd)
 
 void	ft_find_player(t_game *p)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (p->map[i])
@@ -93,18 +98,18 @@ t_game	*ft_struct(int fd)
 		return (free_a_map(r->map, 0), free(r->ft_mlx), free(r), NULL);
 	r->enemies_location = ft_set_the_head();
 	if (!r->enemies_location)
-		return (free_a_map(r->map_cpy, 0), free_a_map(r->map, 0), free(r->ft_mlx), free(r), NULL);
+		return (free_a_map(r->map_cpy, 0), free_a_map(r->map, 0),
+			free(r->ft_mlx), free(r), NULL);
 	r->ft_mlx = ft_mlx_struct(r);
 	return (r);
 }
 
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int			fd;
-	t_game 	*p;
+	int		fd;
+	t_game	*p;
+
 	(void)argc;
-	
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (ft_putstr("Error\nUnable to open file"), 1);

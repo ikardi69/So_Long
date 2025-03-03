@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:55:19 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/02 12:35:17 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:20:11 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,24 @@ void	ft_set_images(t_game *game)
 			"./images/player.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	return ;
+}
+
+int	ft_strlen_edited(char *s)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (s[i])
+	{
+		if (s[i] == '\n' || s[i] == '\r')
+			i++;
+		else
+		{
+			len++;
+			i++;
+		}
+	}
+	return (len);
 }

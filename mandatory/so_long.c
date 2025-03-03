@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/26 15:35:33 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:28:32 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,16 @@ char	**ft_get_map(int fd)
 	map = get_next_line(fd);
 	if (!map || map[0] == '\n')
 		return (get_map_failure(fd, map, buffer = NULL, 1), NULL);
-	while ((buffer = get_next_line(fd)) != NULL)
+	buffer = get_next_line(fd);
+	if (!buffer || buffer[0] == '\n')
+		return (get_map_failure(fd, map, buffer = NULL, 1), NULL);
+	while (buffer)
 	{
 		map = ft_strjoin(map, buffer);
 		if (buffer[0] == '\n')
 			return (get_map_failure(fd, map, buffer, 0), NULL);
 		free(buffer);
+		buffer = get_next_line(fd);
 	}
 	result = ft_split(map, '\n');
 	if (!result)
@@ -50,8 +54,8 @@ char	**ft_get_map(int fd)
 
 void	ft_find_player(t_game *p)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (p->map[i])
@@ -99,25 +103,18 @@ t_game	*ft_struct(int fd)
 	return (r);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int			fd;
-	t_game 	*p;
+	int		fd;
+	t_game	*p;
+
 	(void)argc;
-	
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (ft_putstr("Error\nUnable to open file"), 1);
 	p = ft_struct(fd);
 	if (!p)
 		return (1);
-	// ft_find_player(p);
-	// if (collectibles_check(p))
-	// 	return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
-	// ft_flood_fill(p->map_cpy, p->y, p->x);
-	// if (ft_map_check(p->map_cpy))
-	// 	return (ft_putstr("Not a valid map\n"), ft_finish_free(p->ft_mlx), close(fd), 0);
-	// ft_find_player(p);
 	map_validation(p, argv[1]);
 	ft_open_window(p);
 	return (close(fd), ft_finish_free(p->ft_mlx), 0);

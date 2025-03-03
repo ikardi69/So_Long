@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 12:17:36 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:59:15 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	ft_finish_free(t_mlx *r)
 	int	i;
 
 	i = 0;
+	close(r->ft_game->fd);
 	while (r->ft_game->map[i])
 	{
 		free(r->ft_game->map[i]);

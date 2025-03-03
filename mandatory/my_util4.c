@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:28:12 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 12:13:22 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:17:24 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,9 @@ void	map_validation(t_game *game, char *file)
 void	get_map_failure(int fd, char *map, char *buffer, int sign)
 {
 	ft_putstr("Error\nEmpty file\nOr Empty line\n");
-	if (!sign)
+	if (buffer[0] == '\n')
+		free(buffer);
+	else if (!sign)
 		free(buffer);
 	close(fd);
 	free(map);
