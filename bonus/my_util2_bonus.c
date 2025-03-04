@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:03:15 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/17 14:07:32 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:35:14 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static char	**ft_free(char **s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	while (s[i])
 	{
 		free(s[i]);
@@ -83,7 +85,7 @@ char	**ft_split(char const *s, char c)
 	count = ft_count_words(s, c);
 	words = malloc(sizeof(char *) * (count + 1));
 	if (!words)
-		return (ft_free(words));
+		return (NULL);
 	words = ft_alloc(words, s, c, count + 1);
 	if (!words)
 		return (ft_free(words));

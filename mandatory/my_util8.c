@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:14:25 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/03 13:55:56 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:10:03 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@ static int	ft_first_last_check(char **map)
 static int	ft_rows_check(char **map)
 {
 	int	y;
-	int	x;
 
 	y = 0;
-	x = 0;
 	if (ft_first_last_check(map))
 		return (1);
 	while (map[y])

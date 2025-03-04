@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/04 11:01:47 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:48:56 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**ft_get_map(int fd)
 		return (get_map_failure(fd, map, buffer = NULL, 1), NULL);
 	buffer = get_next_line(fd);
 	if (!buffer || buffer[0] == '\n')
-		return (get_map_failure(fd, map, buffer = NULL, 1), NULL);
+		return (get_map_failure(fd, map, buffer, 1), NULL);
 	while (buffer)
 	{
 		map = ft_strjoin(map, buffer);

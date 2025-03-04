@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:13:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/04 11:03:18 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:44:52 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void	get_map_failure(int fd, char *map, char *buffer, int sign)
 {
 	perror("Error\nEmpty file\nOr Empty line\n");
-	if (buffer[0] == '\n')
-		free(buffer);
+	if (buffer)
+	{
+		if (buffer[0] == '\n')
+			free(buffer);
+	}
 	else if (!sign)
 		free(buffer);
 	close(fd);
