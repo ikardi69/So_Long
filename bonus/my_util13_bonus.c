@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 12:31:22 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/02 11:19:46 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:06:59 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	set_img_ptr(t_mlx *mlx, char c, void **img)
 
 int	destroy_window(t_mlx *game)
 {
-	ft_putstr("You exited the game before finishing it (weak.)\n");
+	ft_putstr("You exited the game before finishing it\n");
 	ft_finish_free(game);
 	exit (1);
 	return (0);

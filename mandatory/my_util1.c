@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 12:18:34 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:05:15 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	ft_exit_finish(t_mlx *game, int new_y, int new_x)
 	if (ft_coins_e_check(game))
 		return ;
 	if (game->map[new_y][new_x] != 'E')
-		ft_putstr("You exited the game before finishing it (weak.)\n");
+		ft_putstr("You exited the game before finishing it\n");
 	ft_finish_free(game);
 	exit(0);
 }
@@ -104,7 +104,7 @@ int	handle_keypress(int keycode, t_mlx *game)
 		return (0);
 	if (keycode == 65307)
 	{
-		ft_putstr("You exited the game before finishing it (weak.)\n");
+		ft_putstr("You exited the game before finishing it\n");
 		return (ft_finish_free(game), exit(0), 1);
 	}
 	else if (keycode == 119 && ++game->moves_count)

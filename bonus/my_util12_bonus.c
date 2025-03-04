@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:13:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/03 14:17:55 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:03:18 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	get_map_failure(int fd, char *map, char *buffer, int sign)
 {
-	ft_putstr("Error\nEmpty file\nOr Empty line\n");
+	perror("Error\nEmpty file\nOr Empty line\n");
 	if (buffer[0] == '\n')
 		free(buffer);
 	else if (!sign)
@@ -38,13 +38,13 @@ void	map_validation(t_game *game, char *file)
 {
 	if (ft_extention_check(file))
 	{
-		ft_putstr("Error: Invalid file extension. File must end with '.ber'\n");
+		perror("Error\nInvalid file extension. File must end with '.ber'\n");
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}
 	if (collectibles_check(game))
 	{
-		ft_putstr("Not a valid map\n");
+		perror("Error\nNot a valid map\n");
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}
@@ -52,7 +52,7 @@ void	map_validation(t_game *game, char *file)
 	ft_flood_fill(game->map_cpy, game->y, game->x);
 	if (ft_map_check(game->map_cpy))
 	{
-		ft_putstr("Not a valid map\n");
+		perror("Error\nNot a valid map\n");
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}
@@ -63,13 +63,13 @@ void	ft_failing(t_game *game, int sign)
 {
 	if (sign == 1)
 	{
-		ft_putstr("Error initializing MLX\n");
+		perror("Error\ninitializing MLX\n");
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}
 	if (sign == 2)
 	{
-		ft_putstr("Error loading images\n");
+		perror("Error\nloading images\n");
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}

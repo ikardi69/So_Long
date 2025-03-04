@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/03 14:20:01 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:06:35 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 		{
 			if (movment_string(game))
 			{
-				ft_putstr("Error\n");
+				perror("Error\nallocation failed");
 				ft_finish_free(game);
 				exit(1);
 			}
@@ -105,7 +105,7 @@ int	handle_keypress(int keycode, t_mlx *game)
 		return (0);
 	if (keycode == 65307)
 	{
-		ft_putstr("You exited the game before finishing it (weak.)\n");
+		ft_putstr("You exited the game before finishing it\n");
 		return (ft_finish_free(game), exit(0), 1);
 	}
 	else if (keycode == 119 && ++game->moves_count)

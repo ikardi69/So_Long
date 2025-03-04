@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/03 14:21:46 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:01:47 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ int	main(int argc, char **argv)
 	(void)argc;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (ft_putstr("Error\nUnable to open file"), 1);
+		return (perror("Error\nUnable to open file"), 1);
 	p = ft_struct(fd);
 	if (!p)
-		return (close(fd), 1);
+		return (close(fd), perror("Error\nUnable to set the struct"), 1);
 	map_validation(p, argv[1]);
 	ft_set_enemies_location(p);
 	ft_open_window(p);

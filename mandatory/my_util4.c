@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:28:12 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/03 14:17:24 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:04:40 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	map_validation(t_game *game, char *file)
 {
 	if (ft_extention_check(file))
 	{
-		ft_putstr("Error: Invalid file extension. File must end with '.ber'\n");
+		perror("Error\nInvalid file extension. File must end with '.ber'\n");
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}
 	if (collectibles_check(game))
 	{
-		ft_putstr("Not a valid map\n");
+		perror("Error\nNot a valid map\n");
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}
@@ -71,7 +71,7 @@ void	map_validation(t_game *game, char *file)
 	ft_flood_fill(game->map_cpy, game->y, game->x);
 	if (ft_map_check(game->map_cpy))
 	{
-		ft_putstr("Not a valid map\n");
+		perror("Error\nNot a valid map\n");
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}
@@ -80,7 +80,7 @@ void	map_validation(t_game *game, char *file)
 
 void	get_map_failure(int fd, char *map, char *buffer, int sign)
 {
-	ft_putstr("Error\nEmpty file\nOr Empty line\n");
+	perror("Error\nEmpty file\nOr Empty line\n");
 	if (buffer[0] == '\n')
 		free(buffer);
 	else if (!sign)
