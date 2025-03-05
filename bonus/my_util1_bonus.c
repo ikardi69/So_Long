@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/04 11:06:35 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/05 17:17:29 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 void	ft_open_window(t_game *game)
 {
+	printf("t_game game: %p\n", game);
+	printf("t_mlx  game->ft_mlx: %p\n", game);
+
 	game->ft_mlx->mlx_ptr = mlx_init();
+	printf("game->ft_mlx->mlx_ptr: %p\n", game->ft_mlx->mlx_ptr);
 	if (!game->ft_mlx->mlx_ptr)
 		ft_failing(game, 1);
 	ft_set_images(game);
@@ -51,6 +55,7 @@ void	ft_render_map(t_mlx	*mlx)
 			mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, img,
 				x * TILE_SIZE, y * TILE_SIZE);
 		}
+		img = NULL;
 	}
 }
 
@@ -61,11 +66,13 @@ static void	ft_exit_finish(t_mlx *game)
 	else
 		ft_putstr("Winner!!\n");
 	ft_finish_free(game);
+	game = NULL;
 	exit(0);
 }
 
 static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 {
+	printf("t_game game->ft_game: %p\n", game->ft_game);
 	if (game->map[new_y][new_x] == 'E')
 		ft_exit_finish(game);
 	else if (game->map[new_y][new_x] == 'N')
@@ -94,6 +101,8 @@ static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 
 int	handle_keypress(int keycode, t_mlx *game)
 {
+
+	printf("t_mlx game: %p\n", game);
 	int	new_x;
 	int	new_y;
 

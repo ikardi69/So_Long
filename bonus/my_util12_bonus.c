@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:13:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/04 13:44:52 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:04:37 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_set_variables(t_game *game)
 	game->x = 0;
 	game->y = 0;
 	game->player = 0;
-	game->enemy = 0;
 }
 
 void	map_validation(t_game *game, char *file)
@@ -81,21 +80,21 @@ void	ft_failing(t_game *game, int sign)
 void	ft_set_images(t_game *game)
 {
 	game->ft_mlx->coin = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./images/coin.xpm",
+			"./textures/coin.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->wall = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./images/wall.xpm",
+			"./textures/wall.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->ground = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./images/ground.xpm",
+			"./textures/ground.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->exit = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./images/exit.xpm",
+			"./textures/exit.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->player = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./images/player.xpm",
+			"./textures/player.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 	game->ft_mlx->enemy = mlx_xpm_file_to_image(game->ft_mlx->mlx_ptr,
-			"./images/enemy.xpm",
+			"./textures/enemy.xpm",
 			&game->ft_mlx->map_width, &game->ft_mlx->map_height);
 }

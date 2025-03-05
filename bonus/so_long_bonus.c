@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/04 13:48:56 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/05 16:46:28 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_find_player(t_game *p)
 
 t_game	*ft_struct(int fd)
 {
-	t_game	*r;
+	t_game	*r = NULL;
 
 	r = (t_game *)malloc(sizeof(t_game));
 	if (!r)
@@ -107,7 +107,7 @@ t_game	*ft_struct(int fd)
 int	main(int argc, char **argv)
 {
 	int		fd;
-	t_game	*p;
+	t_game	*p = NULL;
 
 	(void)argc;
 	fd = open(argv[1], O_RDONLY);
@@ -119,5 +119,6 @@ int	main(int argc, char **argv)
 	map_validation(p, argv[1]);
 	ft_set_enemies_location(p);
 	ft_open_window(p);
+	printf("---------------------\n");
 	return (ft_finish_free(p->ft_mlx), 0);
 }

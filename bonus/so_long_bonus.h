@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/03 14:27:51 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:04:17 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct s_game
 	int				player;
 	char			**map;
 	char			**map_cpy;
-	int				enemy;
 	struct s_enemy	*enemies_location;
 	struct s_mlx	*ft_mlx;
 }t_game;

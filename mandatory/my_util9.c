@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/03 13:59:15 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:00:58 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ int	collectibles_check(t_game *rs)
 
 static void	ft_mlx_free(t_mlx *game)
 {
-	if (game->win_ptr)
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	if (game->wall)
 		mlx_destroy_image(game->mlx_ptr, game->wall);
 	if (game->coin)
@@ -66,6 +64,11 @@ static void	ft_mlx_free(t_mlx *game)
 		mlx_destroy_image(game->mlx_ptr, game->exit);
 	if (game->player)
 		mlx_destroy_image(game->mlx_ptr, game->player);
+	if (game->win_ptr)
+	{
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+		mlx_destroy_display(game->mlx_ptr);
+	}
 }
 
 void	ft_finish_free(t_mlx *r)

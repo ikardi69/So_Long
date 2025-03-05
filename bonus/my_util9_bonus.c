@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/03 14:13:47 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/05 17:21:58 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static int	col_check_helper(t_game *p)
 	else if (p->exit != 1)
 		return (1);
 	else if (p->player != 1)
-		return (1);
-	else if (p->enemy <= 0)
 		return (1);
 	return (0);
 }
@@ -42,8 +40,6 @@ int	collectibles_check(t_game *rs)
 				rs->exit++;
 			else if (rs->map_cpy[j][i] == 'P')
 				rs->player++;
-			else if (rs->map_cpy[j][i] == 'N')
-				rs->enemy++;
 			i++;
 		}
 	}
@@ -55,8 +51,6 @@ int	collectibles_check(t_game *rs)
 
 static void	ft_mlx_free(t_mlx *game)
 {
-	if (game->win_ptr)
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	if (game->wall)
 		mlx_destroy_image(game->mlx_ptr, game->wall);
 	if (game->coin)
@@ -69,6 +63,14 @@ static void	ft_mlx_free(t_mlx *game)
 		mlx_destroy_image(game->mlx_ptr, game->player);
 	if (game->enemy)
 		mlx_destroy_image(game->mlx_ptr, game->enemy);
+	if (game->win_ptr)
+	{
+		
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+		mlx_destroy_display(game->mlx_ptr);
+		free(game->mlx_ptr);
+		game->mlx_ptr = NULL;
+	}
 }
 
 void	ft_finish_free(t_mlx *r)
@@ -91,6 +93,7 @@ void	ft_finish_free(t_mlx *r)
 	}
 	free(r->ft_game->map_cpy);
 	ft_lstclear(&(r->ft_game->enemies_location));
+	printf("r->mlx_ptr: %p\n", r->mlx_ptr);
 	ft_mlx_free(r);
 	free(r->ft_game);
 	free(r);
