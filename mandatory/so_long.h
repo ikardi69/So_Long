@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/04 10:16:00 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:19:05 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ int			ft_extention_check(char *file);
 void		ft_failing(t_game *game, int sign);
 void		ft_set_images(t_game *game);
 int			ft_strlen_edited(char *s);
+int			destroy_window(t_mlx *game);
 
 #endif

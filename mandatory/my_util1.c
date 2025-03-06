@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/04 11:05:15 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:22:28 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ void	ft_open_window(t_game *game)
 	game->ft_mlx->y *= TILE_SIZE;
 	game->ft_mlx->win_ptr = mlx_new_window(game->ft_mlx->mlx_ptr,
 			game->ft_mlx->x, game->ft_mlx->y, "So_long");
-	mlx_key_hook(game->ft_mlx->win_ptr, handle_keypress, (void *)game->ft_mlx);
+	if (!game->ft_mlx->win_ptr)
+		ft_failing(game, 3);
+	mlx_hook(game->ft_mlx->win_ptr, 2, 1,
+		handle_keypress, (void *)game->ft_mlx);
+	mlx_hook(game->ft_mlx->win_ptr, 17, 0,
+		destroy_window, (void *)game->ft_mlx);
 	ft_render_map(game->ft_mlx);
 	mlx_loop(game->ft_mlx->mlx_ptr);
 }
@@ -60,12 +65,17 @@ void	ft_render_map(t_mlx	*mlx)
 	}
 }
 
-static void	ft_exit_finish(t_mlx *game, int new_y, int new_x)
+static void	ft_exit_finish(t_mlx *game)
 {
 	if (ft_coins_e_check(game))
 		return ;
-	if (game->map[new_y][new_x] != 'E')
-		ft_putstr("You exited the game before finishing it\n");
+	else
+	{
+		ft_putstr("Moves: ");
+		ft_putnbr(game->moves_count);
+		ft_putstr("\n");
+		ft_putstr("Winner!!\n");
+	}
 	ft_finish_free(game);
 	exit(0);
 }
@@ -73,7 +83,7 @@ static void	ft_exit_finish(t_mlx *game, int new_y, int new_x)
 static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 {
 	if (game->map[new_y][new_x] == 'E')
-		ft_exit_finish(game, new_y, new_x);
+		ft_exit_finish(game);
 	else
 	{
 		game->map[game->player_y][game->player_x] = '0';

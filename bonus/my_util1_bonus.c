@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/05 17:17:29 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:26:17 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 void	ft_open_window(t_game *game)
 {
-	printf("t_game game: %p\n", game);
-	printf("t_mlx  game->ft_mlx: %p\n", game);
-
 	game->ft_mlx->mlx_ptr = mlx_init();
-	printf("game->ft_mlx->mlx_ptr: %p\n", game->ft_mlx->mlx_ptr);
 	if (!game->ft_mlx->mlx_ptr)
 		ft_failing(game, 1);
 	ft_set_images(game);
@@ -30,6 +26,8 @@ void	ft_open_window(t_game *game)
 	game->ft_mlx->y *= TILE_SIZE;
 	game->ft_mlx->win_ptr = mlx_new_window(game->ft_mlx->mlx_ptr,
 			game->ft_mlx->x, game->ft_mlx->y, "So_long");
+	if (!game->ft_mlx->win_ptr)
+		ft_failing(game, 3);
 	mlx_hook(game->ft_mlx->win_ptr, 2, 1,
 		handle_keypress, (void *)game->ft_mlx);
 	mlx_hook(game->ft_mlx->win_ptr, 17, 0,
@@ -64,7 +62,12 @@ static void	ft_exit_finish(t_mlx *game)
 	if (ft_coins_e_check(game))
 		return ;
 	else
+	{
+		ft_putstr("Moves: ");
+		ft_putnbr(game->moves_count);
+		ft_putstr("\n");
 		ft_putstr("Winner!!\n");
+	}
 	ft_finish_free(game);
 	game = NULL;
 	exit(0);
@@ -72,7 +75,6 @@ static void	ft_exit_finish(t_mlx *game)
 
 static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 {
-	printf("t_game game->ft_game: %p\n", game->ft_game);
 	if (game->map[new_y][new_x] == 'E')
 		ft_exit_finish(game);
 	else if (game->map[new_y][new_x] == 'N')
@@ -86,12 +88,9 @@ static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 		ft_render_map(game);
 		if (game->player_x != new_x || game->player_y != new_y)
 		{
-			if (movment_string(game))
-			{
-				perror("Error\nallocation failed");
-				ft_finish_free(game);
-				exit(1);
-			}
+			ft_putstr("Moves: ");
+			ft_putnbr(game->moves_count);
+			ft_putstr("\n");
 		}
 		game->player_y = new_y;
 		game->player_x = new_x;
@@ -101,8 +100,6 @@ static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 
 int	handle_keypress(int keycode, t_mlx *game)
 {
-
-	printf("t_mlx game: %p\n", game);
 	int	new_x;
 	int	new_y;
 

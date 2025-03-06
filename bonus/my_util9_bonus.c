@@ -6,14 +6,30 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/05 17:21:58 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:44:55 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-static int	col_check_helper(t_game *p)
+static int	col_param_check_helper(t_game *p)
 {
+	int	j;
+	int	i;
+
+	j = -1;
+	while (p->map_cpy[++j])
+	{
+		i = -1;
+		while (p->map_cpy[j][++i])
+		{
+			if (p->map_cpy[j][i] != '1' && p->map_cpy[j][i] != '0'
+				&& p->map_cpy[j][i] != 'P' && p->map_cpy[j][i] != 'E'
+				&& p->map_cpy[j][i] != 'C' && p->map_cpy[j][i] != 'N'
+				&& p->map_cpy[j][i] != '\n' && p->map_cpy[j][i] != '\r')
+				return (1);
+		}
+	}
 	if (p->coins <= 0)
 		return (1);
 	else if (p->exit != 1)
@@ -43,7 +59,7 @@ int	collectibles_check(t_game *rs)
 			i++;
 		}
 	}
-	if (col_check_helper(rs))
+	if (col_param_check_helper(rs))
 		return (1);
 	else
 		return (0);
@@ -65,12 +81,11 @@ static void	ft_mlx_free(t_mlx *game)
 		mlx_destroy_image(game->mlx_ptr, game->enemy);
 	if (game->win_ptr)
 	{
-		
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 		mlx_destroy_display(game->mlx_ptr);
-		free(game->mlx_ptr);
-		game->mlx_ptr = NULL;
 	}
+	if (game->mlx_ptr)
+		free(game->mlx_ptr);
 }
 
 void	ft_finish_free(t_mlx *r)
@@ -93,7 +108,6 @@ void	ft_finish_free(t_mlx *r)
 	}
 	free(r->ft_game->map_cpy);
 	ft_lstclear(&(r->ft_game->enemies_location));
-	printf("r->mlx_ptr: %p\n", r->mlx_ptr);
 	ft_mlx_free(r);
 	free(r->ft_game);
 	free(r);

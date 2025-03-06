@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:13:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/05 15:04:37 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:23:02 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ void	ft_failing(t_game *game, int sign)
 	if (sign == 2)
 	{
 		perror("Error\nloading images\n");
+		ft_finish_free(game->ft_mlx);
+		exit(1);
+	}
+	if (sign == 3)
+	{
+		ft_putstr("Error openning the window\n");
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}

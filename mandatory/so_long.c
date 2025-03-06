@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/04 11:04:00 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:17:32 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,19 @@ int	main(int argc, char **argv)
 	int		fd;
 	t_game	*p;
 
-	(void)argc;
+	if (argc != 2)
+	{
+		if (argc > 2)
+			return (perror("Error\nToo many arguments\n"), 1);
+		else
+			return (perror("Error\nPlease enter an argument\n"), 1);
+	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (perror("Error\nUnable to open file"), 1);
 	p = ft_struct(fd);
 	if (!p)
-		return (perror("Error\nUnable to set the struct"), 1);
+		return (close(fd), perror("Error\nUnable to set the struct"), 1);
 	map_validation(p, argv[1]);
 	ft_open_window(p);
 	return (close(fd), ft_finish_free(p->ft_mlx), 0);

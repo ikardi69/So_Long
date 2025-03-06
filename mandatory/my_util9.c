@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:32:28 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/05 15:00:58 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 11:30:41 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 
 static int	col_check_helper(t_game *p)
 {
+	int	j;
+	int	i;
+
+	j = -1;
+	while (p->map_cpy[++j])
+	{
+		i = -1;
+		while (p->map_cpy[j][++i])
+		{
+			if (p->map_cpy[j][i] != '1' && p->map_cpy[j][i] != '0'
+				&& p->map_cpy[j][i] != 'P' && p->map_cpy[j][i] != 'E'
+				&& p->map_cpy[j][i] != 'C' && p->map_cpy[j][i] != '\n'
+				&& p->map_cpy[j][i] != '\r')
+				return (1);
+		}
+	}
 	if (p->coins <= 0)
 		return (1);
 	else if (p->exit != 1)
@@ -69,6 +85,8 @@ static void	ft_mlx_free(t_mlx *game)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 		mlx_destroy_display(game->mlx_ptr);
 	}
+	if (game->mlx_ptr)
+		free(game->mlx_ptr);
 }
 
 void	ft_finish_free(t_mlx *r)

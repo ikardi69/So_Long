@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 16:24:24 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/02/28 13:18:13 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:24:59 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ int	update_enemy(t_mlx *game)
 	tmp = game->ft_game->enemies_location;
 	tmp = tmp->next;
 	frames++;
+	if (movment_string(game))
+	{
+		perror("Error\nallocation failed");
+		ft_finish_free(game);
+		exit(1);
+	}
 	if (frames % 9009 == 0)
 	{
 		while (tmp)

@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:55:19 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/05 15:03:38 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:32:31 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@ void	ft_failing(t_game *game, int sign)
 {
 	if (sign == 1)
 	{
-		ft_putstr("Error initializing MLX\n");
+		perror("Error initializing MLX\n");
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}
 	if (sign == 2)
 	{
-		ft_putstr("Error loading images\n");
+		perror("Error loading textures\n");
+		ft_finish_free(game->ft_mlx);
+		exit(1);
+	}
+	if (sign == 3)
+	{
+		perror("Error openning the window\n");
 		ft_finish_free(game->ft_mlx);
 		exit(1);
 	}
@@ -66,4 +72,12 @@ int	ft_strlen_edited(char *s)
 		}
 	}
 	return (len);
+}
+
+int	destroy_window(t_mlx *game)
+{
+	ft_putstr("You exited the game before finishing it\n");
+	ft_finish_free(game);
+	exit (1);
+	return (0);
 }
