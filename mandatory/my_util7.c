@@ -6,25 +6,35 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 20:25:05 by ikardi            #+#    #+#             */
-/*   Updated: 2025/02/28 12:16:58 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:11:01 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_extention_check(char *file)
+int	ft_extention_check(char *file, t_game *game)
 {
-	int	i;
+	int	ber_len;
+	int	file_len;
+	char *p;
 
-	i = 0;
-	if (file[i] == '.' && file[i + 1] == '/')
-		i++;
-	while (file[i] && file[i] != '.')
-		i++;
-	if (!file[i])
+	p = ft_strdup(".ber");
+	if (!p)
+	{
+		perror("Error\nAn allocation failed\n");
+		ft_finish_free(game->ft_mlx);
+		exit(1);
 		return (1);
-	if (ft_strncmp(file + i, ".ber", ft_strlen(file + i)))
-		return (1);
+	}
+	ber_len = ft_strlen(p) - 1;
+	file_len = ft_strlen(file) - 1;
+	while (ber_len != 0)
+	{
+		if (file[file_len] != p[ber_len])
+			return (1);
+		ber_len--;
+		file_len--;
+	}
 	return (0);
 }
 

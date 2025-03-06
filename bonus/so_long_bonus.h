@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/05 15:04:17 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:05:26 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void		get_map_failure(int fd, char *map, char *buffer, int sign);
 int			destroy_window(t_mlx *game);
 void		ft_set_variables(t_game *game);
 void		map_validation(t_game *game, char *file);
-int			ft_extention_check(char *file);
+int			ft_extention_check(char *file, t_game *game);
 void		ft_failing(t_game *game, int sign);
 void		set_img_ptr(t_mlx *mlx, char c, void **img);
 void		ft_set_images(t_game *game);

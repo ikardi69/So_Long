@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:28:12 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/04 13:49:32 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:11:07 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_coins_e_check(t_mlx *game)
 
 void	map_validation(t_game *game, char *file)
 {
-	if (ft_extention_check(file))
+	if (ft_extention_check(file, game))
 	{
 		perror("Error\nInvalid file extension. File must end with '.ber'\n");
 		ft_finish_free(game->ft_mlx);
