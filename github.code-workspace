@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../test/e"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"get_next_line.h": "c",
+			"array": "c",
+			"string_view": "c",
+			"format": "c",
+			"initializer_list": "c",
+			"span": "c",
+			"chrono": "c",
+			"deque": "c",
+			"string": "c",
+			"unordered_map": "c",
+			"vector": "c",
+			"text_encoding": "c",
+			"so_long_bonus.h": "c",
+			"so_long.h": "c"
+		}
+	}
+}

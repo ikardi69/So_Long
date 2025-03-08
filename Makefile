@@ -6,6 +6,8 @@ BONUS_NAME = so_long_bonus
 
 MANDATORY_DIR = mandatory/
 BONUS_DIR = bonus/
+MANDATORY_HEADER = $(MANDATORY_DIR)so_long.h
+BONUS_HEADER = $(BONUS_DIR)so_long_bonus.h
 
 SRCS = $(MANDATORY_DIR)my_util1.c \
 		$(MANDATORY_DIR)my_util2.c \
@@ -42,17 +44,19 @@ MLX_FLAGS = -Lmlx -lmlx_Linux -lXext -lX11
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(MANDATORY_HEADER)
 	$(CC) $(CFLAGS) $(OBJS) $(MLX) $(MLX_FLAGS) -o $(NAME)
 
 bonus: $(BONUS_NAME)
 
-$(BONUS_NAME): $(BONUS_OBJS)
+$(BONUS_NAME): $(BONUS_OBJS) $(BONUS_HEADER)
 	$(CC) $(CFLAGS) $(BONUS_OBJS) $(MLX) $(MLX_FLAGS) -o $(BONUS_NAME)
 
-%.o: %.c
+%.o: %.c $(MANDATORY_HEADER)
 	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
 
+%_bonus.o: %_bonus.c $(BONUS_HEADER)
+	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS)
 

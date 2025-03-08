@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 20:25:05 by ikardi            #+#    #+#             */
-/*   Updated: 2025/03/06 14:10:25 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:47:16 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_extention_check(char *file, t_game *game)
 {
-	int	ber_len;
-	int	file_len;
-	char *p;
+	int		ber_len;
+	int		file_len;
+	char	*p;
 
 	p = ft_strdup(".ber");
 	if (!p)
@@ -31,11 +31,11 @@ int	ft_extention_check(char *file, t_game *game)
 	while (ber_len != 0)
 	{
 		if (file[file_len] != p[ber_len])
-			return (1);
+			return (free(p), 1);
 		ber_len--;
 		file_len--;
 	}
-	return (0);
+	return (free(p), 0);
 }
 
 int	ft_rowslen(char **map)
