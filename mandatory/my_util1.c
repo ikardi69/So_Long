@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/06 13:22:28 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/09 01:16:56 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ static void	ft_new_position(t_mlx *game, int new_y, int new_x)
 		ft_render_map(game);
 		if (game->player_x != new_x || game->player_y != new_y)
 		{
+			game->moves_count++;
 			ft_putstr("Moves: ");
 			ft_putnbr(game->moves_count);
 			ft_putstr("\n");
@@ -117,13 +118,13 @@ int	handle_keypress(int keycode, t_mlx *game)
 		ft_putstr("You exited the game before finishing it\n");
 		return (ft_finish_free(game), exit(0), 1);
 	}
-	else if (keycode == 119 && ++game->moves_count)
+	else if (keycode == 119)
 		new_y--;
-	else if (keycode == 115 && ++game->moves_count)
+	else if (keycode == 115)
 		new_y++;
-	else if (keycode == 97 && ++game->moves_count)
+	else if (keycode == 97)
 		new_x--;
-	else if (keycode == 100 && ++game->moves_count)
+	else if (keycode == 100)
 		new_x++;
 	if (game->map[new_y][new_x] != '1')
 		ft_new_position(game, new_y, new_x);

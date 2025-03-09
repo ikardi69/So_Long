@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:41 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/08 12:44:21 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/09 01:15:45 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,5 @@ int	main(int argc, char **argv)
 		return (close(fd), perror("Error\nUnable to set the struct"), 1);
 	map_validation(p, argv[1]);
 	ft_open_window(p);
-	return (close(fd), ft_finish_free(p->ft_mlx), 0);
+	return (ft_finish_free(p->ft_mlx), 0);
 }

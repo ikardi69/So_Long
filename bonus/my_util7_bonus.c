@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 20:25:05 by ikardi            #+#    #+#             */
-/*   Updated: 2025/03/08 12:47:16 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/09 01:15:17 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_extention_check(char *file, t_game *game)
 	}
 	ber_len = ft_strlen(p) - 1;
 	file_len = ft_strlen(file) - 1;
-	while (ber_len != 0)
+	while (ber_len >= 0)
 	{
 		if (file[file_len] != p[ber_len])
 			return (free(p), 1);
