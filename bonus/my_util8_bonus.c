@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:14:25 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/03 14:22:37 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:18:45 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	ft_map_check(char **map)
 	int	y;
 
 	y = 0;
-	if (ft_rows_check(map) || ft_rows_len_check(map))
+	if (ft_rows_check(map) || ft_rows_len_check(map) || walls_check(map))
 		return (1);
 	while (map[y])
 	{

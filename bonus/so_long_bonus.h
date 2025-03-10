@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:21 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/09 01:26:21 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:18:26 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,6 @@ void		ft_failing(t_game *game, int sign);
 void		set_img_ptr(t_mlx *mlx, char c, void **img);
 void		ft_set_images(t_game *game);
 int			ft_strlen_edited(char *s);
+int			walls_check(char **map);
 
 #endif

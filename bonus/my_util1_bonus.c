@@ -6,7 +6,7 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:45:01 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/09 01:18:48 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:33:38 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	ft_exit_finish(t_mlx *game)
 	else
 	{
 		ft_putstr("Moves: ");
-		ft_putnbr(game->moves_count);
+		ft_putnbr(++game->moves_count);
 		ft_putstr("\n");
 		ft_putstr("Winner!!\n");
 	}

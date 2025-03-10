@@ -19,6 +19,7 @@ SRCS = $(MANDATORY_DIR)my_util1.c \
 		$(MANDATORY_DIR)my_util8.c \
 		$(MANDATORY_DIR)my_util9.c \
 		$(MANDATORY_DIR)my_util10.c \
+		$(MANDATORY_DIR)my_util11.c \
 		$(MANDATORY_DIR)so_long.c
 OBJS = $(SRCS:.c=.o)
 
@@ -35,6 +36,7 @@ BONUS_SRCS = $(BONUS_DIR)my_util1_bonus.c \
 			$(BONUS_DIR)my_util11_bonus.c \
 			$(BONUS_DIR)my_util12_bonus.c \
 			$(BONUS_DIR)my_util13_bonus.c \
+			$(BONUS_DIR)my_util14_bonus.c \
 			$(BONUS_DIR)so_long_bonus.c
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
