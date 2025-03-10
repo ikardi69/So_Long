@@ -6,15 +6,15 @@
 /*   By: mteffahi <mteffahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:11:27 by mteffahi          #+#    #+#             */
-/*   Updated: 2025/03/10 15:16:53 by mteffahi         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:47:27 by mteffahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-int walls_check(char **map)
+int	walls_check(char **map)
 {
-	int y;
+	int	y;
 	int	len;
 
 	y = -1;
