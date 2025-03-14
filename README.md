@@ -48,7 +48,7 @@ ESC	Quit the game
 
 bash:
 
-git clone https://github.com/yourusername/so_long.git
+git clone https://github.com/ikardi69/so_long.git
 
 cd so_long
 
