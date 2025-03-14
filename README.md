@@ -25,7 +25,7 @@ This project is part of the 42 School curriculum, designed to improve skills in 
 
 🔥 Sprite Animation – Smooth character and object animations
 
-🔥 On-Screen Move Counter – Display movements directly in the game instead of the terminal
+🔥 On-Screen Move Counter – Display movements directly in the game instead of just in the terminal
 
 🎮 Controls
 
