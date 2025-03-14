@@ -1,4 +1,6 @@
-🐬 So_Long
+<p align="center">
+  <h1>🐬 So_Long</h1>
+</p>
 
 
 So_Long is a simple 2D game built using C and the MiniLibX graphical library. The goal of the game is to collect all collectibles on the map and escape through the exit while avoiding obstacles.
