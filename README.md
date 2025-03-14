@@ -30,7 +30,9 @@ This project is part of the 42 School curriculum, designed to improve skills in 
 
 🔥 On-Screen Move Counter – Display movements directly in the game instead of just in the terminal
 
-🎮 Controls
+<p align="center">
+  <h1>🎮 Controls</h1>
+</p>
 
 Key	Action
 
@@ -44,7 +46,9 @@ D / →	Move Right
 
 ESC	Quit the game
 
-🛠 Installation & Usage
+<p align="center">
+  <h1>🛠 Installation & Usage</h1>
+</p>
 
 1️⃣ Clone the repository
 
@@ -73,7 +77,9 @@ Make bonus
 
 ./so_long_bonus maps/valid/bonus/example_map.ber
 
-🗺 Map Format
+<p align="center">
+  <h1>🗺 Map Format</h1>
+</p>
 
 Maps are .ber files containing the following characters:
 
@@ -102,7 +108,9 @@ Example:
 111111
 
 
-🖥 Dependencies
+<p align="center">
+  <h1>🖥 Dependencies</h1>
+</p>
 
 Ensure you have MiniLibX installed. If not, install it with:
 
@@ -119,7 +127,9 @@ bash:
 
 -L minilibx-linux -lmlx -lXext -lX11 -lm
 
-📷 Screenshots:
+<p align="center">
+  <h1>📷 Screenshots:</h1>
+</p>
 
 
 ![image](https://github.com/user-attachments/assets/fd1bf932-79f0-48b4-8208-41fc34ff221c)
@@ -139,7 +149,9 @@ Different map themes
 
 Power-ups and obstacles
 
-🏆 Credits
+<p align="center">
+  <h1>🏆 Credits</h1>
+</p>
 
 Created by Mouhssine Teffahi as part of the 42 School so_long project.
 
