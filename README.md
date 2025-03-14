@@ -62,12 +62,13 @@ make
 
 bash:
 
-./so_long maps/example_map.ber
+./so_long maps/valid/example_map.ber
 
 for the bonus part:
 
 Make bonus
 
+./so_long_bonus maps/valid/bonus/example_map.ber
 
 🗺 Map Format
 
@@ -84,6 +85,8 @@ C	Collectible
 E	Exit
 
 P	Player start position
+
+N Enemy position (Bonus part)
 
 Example:
 
