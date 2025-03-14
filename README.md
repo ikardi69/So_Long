@@ -6,7 +6,10 @@ So_Long is a simple 2D game built using C and the MiniLibX graphical library. Th
 This project is part of the 42 School curriculum, designed to improve skills in window management, event handling, textures, and game logic.
 
 
-<h1 align="center">📌 Features</h1>
+<p align="center">
+  <h1>📌 Features</h1>
+</p>
+
 
 
 ✅ Basic 2D Gameplay – Move the player around and collect items
