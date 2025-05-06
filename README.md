@@ -1,5 +1,8 @@
 <h1 align="center">🐬 So_Long</h1>
 
+![Language](https://img.shields.io/badge/language-C-blue)
+![Version](https://img.shields.io/badge/version-16.3-orange)
+
 
 So_Long is a simple 2D game built using C and the MiniLibX graphical library. The goal of the game is to collect all collectibles on the map and escape through the exit while avoiding obstacles.
 
